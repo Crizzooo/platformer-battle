@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 
 //Containers
 import Layout from './containers/layout';
+import Leaderboard from './components/Leaderboard';
 
 import {Provider} from 'react-redux';
 import{ Router, Route, browserHistory, IndexRoute } from 'react-router';
@@ -24,6 +25,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={Layout} onEnter={() => sendMessage('WELCOME TO TEH GREATEST APP EVER')} >
         /* Children Components */
+        <Route path="/leaderboard" component={Leaderboard} />
       </Route>
     </Router>
   </Provider>,

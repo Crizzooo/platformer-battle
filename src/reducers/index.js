@@ -1,19 +1,22 @@
 
 
 const initialState = {
-  message: 'bye'
+  message: 'bye',
+  players: [{name: 'Omer', score: 77}, {name: 'Chris', score: 88}, {name: 'Skins', score: 99}, {name: 'Jimmy', score: 33}, {name: '2pac', score: 66}, {name: 'Charlie', score: 44}]
 };
 
 /* Reducer */
 
-export default ( state = initialState, action) => {
+export default (state = initialState, action) => {
 
   const newState = Object.assign({}, state);
 
   switch (action.type) {
+
     case CHANGE_MESSAGE:
       newState.message = action.message
       break
+
     default:
       return state;
   }
@@ -25,7 +28,7 @@ export default ( state = initialState, action) => {
 const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 
 /* Action Creators */
-export const loadMessage = message => ({ type: CHANGE_MESSAGE, message});
+export const loadMessage = message => ({ type: CHANGE_MESSAGE, message });
 
 /* Action Dispatchers */
 export const changeMessage = (message) => dispatch => {
