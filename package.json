@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.15.3",
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
@@ -22,13 +23,14 @@
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.2.0",
     "socket.io": "^1.7.3",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-livereload-plugin": "^0.10.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.4"
   },
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/index.js --watch server",
     "build": "webpack",
     "build-sass": "node-sass -w client/assets/stylesheets/style.scss -o client/public/stylesheets",
     "build-dev": "npm run build -- --watch & npm run build-sass",

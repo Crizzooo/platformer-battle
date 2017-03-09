@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 //Components
 // import Header from './components/Header';
@@ -13,23 +14,20 @@ import{ Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import store from './store.js';
 
-/* Actions to Dispatch */
-import { loadMessage } from './reducers/index.js';
 
-function sendMessage(str) {
-  store.dispatch(loadMessage(str));
+
+/* Actions to Dispatch */
+import { fetchPlayers } from './reducers/index.js';
+
+function gettingPlayers() {
+  store.dispatch(fetchPlayers());
 }
 
-const socket = io();
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Layout} onEnter={() => {
-          sendMessage('WELCOME TO TEH GREATEST APP EVER');
-          // const socket = io();
-        }
-       }>
+      <Route path="/" component={Layout} onEnter={ gettingPlayers }>
        {
         //  <Route path="/leaderboard" component={Leaderboard} />
          /* Children Components */

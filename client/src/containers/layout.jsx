@@ -6,10 +6,20 @@ import Header from '../components/Header';
 import Leaderboard from '../components/Leaderboard';
 import GameContainer from './gameContainer.jsx';
 
+
+
+
 class Layout extends Component {
 
   constructor(props) {
     super(props);
+    this.socket = {};
+  }
+
+  componentDidMount() {
+    console.log("Layout mounted - creating socket!");
+    this.socket = io();
+    console.log(this.socket);
   }
 
   render () {

@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const apiRoutes = require('./apiRoutes');
+
 const app = express();
 
 const server = app.listen(3000, () => {
@@ -14,7 +16,7 @@ const io = require('socket.io')(server);
 app.use(bodyParser.urlencoded({extended: false}));
 
 io.on('connection', (socket) => {
-  console.log('a user connected with socket:', socket);
+  console.log('a user connected with socket:');
 
   socket.on('disconnect', () => {
     console.log('a user has disconnected!');
@@ -23,6 +25,18 @@ io.on('connection', (socket) => {
 
 // serve static assets normally
 app.use(express.static(path.resolve(__dirname, '..', 'client')));
+
+
+app.use('/api', apiRoutes);
+
+
+
+
+
+
+
+
+
 
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
