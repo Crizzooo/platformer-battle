@@ -25,6 +25,7 @@ export class lobbyControls extends React.Component {
     createNewPlayer(this.state);
     $('#addPlayerModal').modal('hide');
   }
+  
 // //onClick={() => props.addPlayer({name: 'Crizzo', score: 68})
   // foo () {}
   render(){
