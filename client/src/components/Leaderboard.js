@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
+import LobbyControls from './lobbyControls';
+
 export function Leaderboard(props) {
   let players = props.players.sort((a, b) => b.score - a.score)
   return (
@@ -27,6 +29,8 @@ export function Leaderboard(props) {
             }
           </tbody>
         </table>
+        <LobbyControls />
+
       </div>
   )
 }
