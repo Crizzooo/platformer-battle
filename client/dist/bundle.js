@@ -8570,10 +8570,10 @@ function Leaderboard(props) {
     { className: 'col-md-6 leaderboard' },
     _react2.default.createElement(
       'table',
-      { className: 'table table-hover' },
+      { className: 'table table-striped table-inverse table-hover' },
       _react2.default.createElement(
         'thead',
-        null,
+        { className: 'thead-inverse' },
         _react2.default.createElement(
           'tr',
           null,
@@ -13249,7 +13249,7 @@ var Layout = function (_Component) {
         _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(
           'div',
-          { className: 'container' },
+          { className: 'container mainContainer' },
           _react2.default.createElement(
             'div',
             { className: 'row' },
@@ -13454,14 +13454,14 @@ var Header = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "App" },
+        { className: "App bg-primary" },
         _react2.default.createElement(
           "div",
           { className: "App-header" },
           _react2.default.createElement(
             "h2",
             null,
-            "Welcome to Platformer Battle"
+            "Welcome to Platformer Battle!"
           )
         )
       );
@@ -13516,7 +13516,15 @@ var gameContainer = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'col-md-6 gameContainer' },
-        _react2.default.createElement('button', { type: 'button', className: 'btn btn-lg btn-success playButton' })
+        _react2.default.createElement(
+          'button',
+          { type: 'button', className: 'btn btn-lg btn-info playButton' },
+          _react2.default.createElement(
+            'span',
+            { className: 'playBtnText' },
+            'Play Game!'
+          )
+        )
       );
     }
   }]);

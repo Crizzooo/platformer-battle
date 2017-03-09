@@ -17,7 +17,7 @@ class Layout extends Component {
     return (
       <div>
         <Header />
-        <div className="container">
+        <div className="container mainContainer">
           <div className="row">
             <Leaderboard />
             { this.props.children }

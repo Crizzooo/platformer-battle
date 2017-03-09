@@ -1,3 +1,7 @@
+/* Variables */
+$button-height: 40px;
+$container-height: 75vh;
+
 body {
   margin: 0;
   padding: 0;
@@ -6,17 +10,10 @@ body {
 
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  padding: 25px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
   color: white;
 }
 
@@ -31,15 +28,32 @@ body {
 
 /* Main Container Styles */
 
+.mainContainer {
+  margin-top: 20px;
+}
+
 .leaderboard {
-  height: 75vh;
+  height: $container-height;
 }
 
 .gameContainer {
-  height: 75vh;
+  height: $container-height;
+  // padding-top: calc(100% - $button-height);
   background-color: black;
+  box-sizing: border-box;
 }
 
 .playButton {
-  margin: auto;
+  height: $button-height;
+  width: 42%;
+  margin: 0 auto;
+  margin-top: calc(calc(#{$container-height} / 2) - #{$button-height});
+  margin-bottom: calc(calc(#{$container-height} / 2) - #{$button-height});
+  display: block;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.playBtnText {
+  font-size: 1em;
 }

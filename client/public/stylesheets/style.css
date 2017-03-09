@@ -1,19 +1,14 @@
+/* Variables */
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif; }
 
 .App {
-  text-align: center; }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px; }
+  text-align: center;
+  padding: 25px; }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
   color: white; }
 
 .App-intro {
@@ -26,12 +21,26 @@ body {
     transform: rotate(360deg); } }
 
 /* Main Container Styles */
+.mainContainer {
+  margin-top: 20px; }
+
 .leaderboard {
   height: 75vh; }
 
 .gameContainer {
   height: 75vh;
-  background-color: black; }
+  background-color: black;
+  box-sizing: border-box; }
 
 .playButton {
-  margin: auto; }
+  height: 40px;
+  width: 42%;
+  margin: 0 auto;
+  margin-top: calc(calc(75vh / 2) - 40px);
+  margin-bottom: calc(calc(75vh / 2) - 40px);
+  display: block;
+  box-sizing: border-box;
+  padding: 5px; }
+
+.playBtnText {
+  font-size: 1em; }

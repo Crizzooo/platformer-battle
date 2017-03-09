@@ -12,7 +12,7 @@ class gameContainer extends Component {
     console.log('game container render');
     return (
         <div className="col-md-6 gameContainer">
-          <button type="button" className="btn btn-lg btn-success playButton"></button>
+          <button type="button" className="btn btn-lg btn-info playButton"><span className="playBtnText">Play Game!</span></button>
         </div>
     );
   }

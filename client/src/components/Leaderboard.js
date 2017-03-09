@@ -5,8 +5,8 @@ export function Leaderboard(props) {
   let players = props.players.sort((a, b) => b.score - a.score)
   return (
       <div className="col-md-6 leaderboard">
-        <table className="table table-hover">
-          <thead>
+        <table className="table table-striped table-inverse table-hover">
+          <thead className="thead-inverse">
             <tr>
               <th>#</th>
               <th>Username</th>
