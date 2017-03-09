@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
@@ -20,8 +21,11 @@ io.on('connection', (socket) => {
   })
 })
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/client/public/index.html');
-// })
+// serve static assets normally
+app.use(express.static(path.resolve(__dirname, '..', 'client')));
 
-app.use(express.static("client"));
+// handle every other route with index.html, which will contain
+// a script tag to your application's JavaScript file(s).
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'))
+})
