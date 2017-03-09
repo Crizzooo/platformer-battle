@@ -12,6 +12,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "express": "^4.15.2",
     "node-sass": "^4.5.0",
+    "nodemon": "^1.11.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
@@ -27,7 +28,7 @@
     "react-scripts": "0.9.4"
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "build": "webpack",
     "build-sass": "node-sass -w client/assets/stylesheets/style.scss -o client/public/stylesheets",
     "build-dev": "npm run build -- --watch & npm run build-sass",
