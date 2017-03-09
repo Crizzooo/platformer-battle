@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 export function Leaderboard(props) {
   let players = props.players.sort((a, b) => b.score - a.score)
   return (
-    <div className="container">
-      <div className="col-md-6">
+      <div className="col-md-6 leaderboard">
         <table className="table table-hover">
           <thead>
             <tr>
@@ -29,7 +28,6 @@ export function Leaderboard(props) {
           </tbody>
         </table>
       </div>
-    </div>
   )
 }
 
@@ -38,4 +36,3 @@ const mapState = state => ({
 })
 
 export default connect(mapState)(Leaderboard)
-

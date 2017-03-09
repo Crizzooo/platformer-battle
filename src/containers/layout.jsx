@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 import Leaderboard from '../components/Leaderboard';
-import GameContainer from './gameContainer.jsx';
+import gameContainer from './containers/gameContainer';
 
 class Layout extends Component {
 
@@ -17,13 +17,9 @@ class Layout extends Component {
     return (
       <div>
         <Header />
-        <div className="container">
-          <div className="row">
-            <Leaderboard />
-            { this.props.children }
-            <GameContainer />
-          </div>
-        </div>
+        <Leaderboard />
+        { this.props.children }
+        <gameContainer />
         { /* Lobby */ }
         { /* Footer? */}
       </div>

@@ -30,8 +30,10 @@ ReactDOM.render(
           // const socket = io();
         }
        }>
-       <Route path="/leaderboard" component={Leaderboard} />
-        /* Children Components */
+       {
+        //  <Route path="/leaderboard" component={Leaderboard} />
+         /* Children Components */
+       }
       </Route>
     </Router>
   </Provider>,
