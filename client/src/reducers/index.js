@@ -52,5 +52,6 @@ export const fetchPlayers = () => dispatch => {
 };
 
 export const createNewPlayer = (player) => {
+  console.log('createNewPlayer is sending: ', player);
   axios.post('/api/player', player);
 };

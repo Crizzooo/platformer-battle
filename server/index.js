@@ -14,6 +14,7 @@ const io = require('socket.io')(server);
 
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 io.on('connection', (socket) => {
   console.log('a user connected with socket:');

@@ -8,8 +8,8 @@ export class lobbyControls extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      score: 0
+        name: '',
+        score: 0
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,9 +21,9 @@ export class lobbyControls extends React.Component {
   }
 
   handleSubmit(evt) {
-    console.log('Submit function called!');
-    createNewPlayer(this.state)
-
+    evt.preventDefault();
+    createNewPlayer(this.state);
+    $('#addPlayerModal').modal('hide');
   }
 // //onClick={() => props.addPlayer({name: 'Crizzo', score: 68})
   // foo () {}

@@ -5925,6 +5925,7 @@ var fetchPlayers = exports.fetchPlayers = function fetchPlayers() {
 };
 
 var createNewPlayer = exports.createNewPlayer = function createNewPlayer(player) {
+  console.log('createNewPlayer is sending: ', player);
   _axios2.default.post('/api/player', player);
 };
 
@@ -15141,8 +15142,9 @@ var lobbyControls = exports.lobbyControls = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
-      console.log('Submit function called!');
+      evt.preventDefault();
       (0, _index.createNewPlayer)(this.state);
+      $('#addPlayerModal').modal('hide');
     }
     // //onClick={() => props.addPlayer({name: 'Crizzo', score: 68})
     // foo () {}
