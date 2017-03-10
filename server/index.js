@@ -64,7 +64,6 @@ io.on('connection', (socket) => {
     //add the received message to the list of messages
     //do we need a messages array?
     // messages.push(message)
-
     //send out the updated list of messages to all clients
     io.emit('messagesUpdate', message)
 
