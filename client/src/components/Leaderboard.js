@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
 import LobbyControls from './lobbyControls';
 
 export function Leaderboard(props) {
@@ -57,7 +56,7 @@ export function Leaderboard(props) {
 }
 
 const mapState = state => ({
-  players: state.players
+  players: state.players.allPlayers
 })
 
 export default connect(mapState)(Leaderboard)

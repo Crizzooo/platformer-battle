@@ -3,10 +3,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-import mainReducer from './reducers/index.js';
+import rootReducer from './reducers/root-reducer.js';
 
 const store = createStore(
-  mainReducer,
+  rootReducer,
   composeWithDevTools(
     applyMiddleware(
       thunkMiddleware,
