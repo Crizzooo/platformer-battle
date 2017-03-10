@@ -29,7 +29,7 @@ export function Leaderboard(props) {
       <td>--</td>
     </tr>))
   }
-  // playerRows = [...livePlayers, ...emptyRows];
+
   //4 - player count times, create empty rows
   console.log('Rendering playerRows:', playerRows);
   return (

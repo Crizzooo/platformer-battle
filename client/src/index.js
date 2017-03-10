@@ -17,7 +17,7 @@ import store from './store.js';
 /* Actions to Dispatch */
 import attachFunctions from './sockets.js';
 
-socket = io();
+
 attachFunctions(socket);
 //call function to attach socket actions;
 

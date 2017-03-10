@@ -1,17 +1,22 @@
 import store from './store.js';
 
-import { loadPlayers } from './reducers/index.js';
+import { loadPlayers, setCurrentPlayer } from './reducers/index.js';
 
 
 const attachFunctions = (socket) => {
-  socket.on('playerUpdate', updatePlayerState);
-  //socket.on('event2', function2)
+  socket.on('playerUpdate', dispatchPlayerUpdates);
+  socket.on('currentPlayer', dispatchCurrentPlayer);
 };
 
-function updatePlayerState(players) {
+function dispatchPlayerUpdates(players) {
   console.log('Socket received players from server:', players);
   //dispatch loadPlayers with players
   store.dispatch(loadPlayers(players));
+}
+
+function dispatchCurrentPlayer(playerObj) {
+  console.log('Store will receive current Player:', playerObj);
+  store.dispatch(setCurrentPlayer(playerObj));
 }
 
 export default attachFunctions;

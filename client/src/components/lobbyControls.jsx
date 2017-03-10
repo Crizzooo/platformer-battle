@@ -11,8 +11,9 @@ export class lobbyControls extends React.Component {
       name: '',
       score: 0
     };
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLeaveGame = this.handleLeaveGame.bind(this);
   }
 
   handleChange(evt) {
@@ -22,24 +23,32 @@ export class lobbyControls extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    createNewPlayer(this.state);
-    //socket emit
-    console.log(socket);
+    console.log('Client is emitting this player obj:', this.state);
+    socket.emit('playerJoined', this.state);
     $('#addPlayerModal').modal('hide');
+  }
 
+  handleLeaveGame(evt) {
+    socket.emit('playerLeaveGame', this.props.currentPlayer);
   }
 
   render() {
+    console.log('What is currentPlayer evaluate to:', this.props.currentPlayer);
+
     return (
       <div>
         {
           /* check if current player or not */
-          this.props.players && this.props.players.length < 4 ?
+          this.props.players && this.props.players.length < 4 && !this.props.currentPlayer.name ?
             <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal"><span className="playBtnText">Join Game!</span></button>
             :
             <div>
-              <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal" disabled><span className="playBtnText">Join Game!</span></button>
+              <button type="button" className="btn btn-lg btn-info btn-warning" onClick={this.handleLeaveGame}><span className="playBtnText">Leave Game!</span></button>
+              {this.props.players.length === 4 ?
               <h6>Maximum player count reached!</h6>
+              :
+              null
+              }
             </div>
         }
         <div className="modal fade" id="addPlayerModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,7 +79,8 @@ export class lobbyControls extends React.Component {
 }
 
 const mapProps = state => ({
-  players: state.players
+  players: state.players,
+  currentPlayer: state.currentPlayer
 });
 
 const mapDispatch = {

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const R = require('ramda');
 
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
@@ -18,19 +19,40 @@ const io = require('socket.io')(server);
 }());
 
 //SERVER IN MEMORY STORAGE FOR GAME STATE MANAGEMENT
-let players = [{name: 'Omer', score: 77}, {name: 'Amy', score: 88}];
+let players = [];
 
 
 //Initiate Socket with all functions for server
 io.on('connection', (socket) => {
-  console.log('a user connected with socket:');
+  console.log('a user connected with socketID', socket.id);
   // emit player update to specific socket
   socket.emit('playerUpdate', players);
 
   //TODO: Call function that attaches all functions to socket
   socket.on('disconnect', () => {
-    console.log('a user has disconnected!');
+    console.log('a user has disconnected with socketId:', socket.id);
     //TODO: remove socket from players array
+    players = R.filter( (player) => player.socketId !== socket.id, players);
+    io.emit('playerUpdate', players);
+  })
+
+  socket.on('playerJoined', (playerObj) => {
+    //TODO: Customize Player Obj for server purposes
+    // Send back new player obj
+    playerObj.socketId = socket.id;
+    players.push(playerObj);
+    //tell client their playerObj
+    socket.emit('currentPlayer', playerObj);
+    //tell other clients about new player
+    io.emit('playerUpdate', players);
+  });
+
+  socket.on('playerLeaveGame', () => {
+    console.log('a user has left the lobby with socketId:', socket.id);
+    //TODO: remove socket from players array
+    players = R.filter( (player) => player.socketId !== socket.id, players);
+    socket.emit('currentPlayer', {});
+    io.emit('playerUpdate', players);
   })
 })
 

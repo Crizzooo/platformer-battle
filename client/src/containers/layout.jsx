@@ -36,7 +36,6 @@ class Layout extends Component {
 
 
 const mapProps = state => {
-  console.log('2 STATE GIVEN TO LAYOUT: ', state);
   return {
     message: state.message
   };
