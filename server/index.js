@@ -19,9 +19,8 @@ io.on('connection', (socket) => {
   console.log('a user connected with socket:');
 
 // attach all functions to individual socket
-  socket.on('disconnect', () => {
-
-    console.log('a user has disconnected!');
+  socket.on('disconnect', (testing) => {
+    console.log('a user has disconnected!', testing);
   })
 })
 
