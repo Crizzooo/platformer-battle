@@ -1,6 +1,10 @@
 /* Variables */
 $button-height: 40px;
-$container-height: 75vh;
+$container-height: 80vh;
+
+* {
+  display: border-box;
+}
 
 body {
   margin: 0;
@@ -8,9 +12,14 @@ body {
   font-family: sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .App {
   text-align: center;
-  padding: 25px;
+  padding: 15px;
 }
 
 .App-header {
@@ -21,9 +30,8 @@ body {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.table {
+  margin-bottom: 10px;
 }
 
 /* Main Container Styles */
@@ -37,7 +45,7 @@ body {
 }
 
 .gameContainer {
-  height: $container-height;
+  height: 83vh;
   // padding-top: calc(100% - $button-height);
   background-color: black;
   box-sizing: border-box;
@@ -56,4 +64,51 @@ body {
 
 .playBtnText {
   font-size: 1em;
+}
+
+/* Chat App Styles */
+.chatContainer {
+  margin-top: 10px;
+  // padding: 5px;
+  // border: 1px solid black;
+}
+
+.chatComponents {
+  display: border-box;
+  border-radius: 10px;
+  height: 40vh;
+  margin: 5px;
+}
+
+.messageForm {
+  padding: 3px;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+#messageDisplay {
+  padding: 5px;
+  height: 90%;
+  border-radius: 10px;
+  background-color: rgba(172, 172, 172, 0.2);
+}
+
+#createMessage {
+  border: 0;
+  padding: 10px;
+  width: 75%;
+  margin-right: 0.5%;
+}
+
+#sendMessage {
+  width: 24%;
+  padding: 10px;
+}
+
+.wrap {
+  min-height: 45vh;
+}
+
+.chatFooter {
+  margin-top: 5px;
+  height: 60px;
 }
