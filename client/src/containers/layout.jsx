@@ -13,13 +13,6 @@ class Layout extends Component {
 
   constructor(props) {
     super(props);
-    this.socket = {};
-  }
-
-  componentDidMount() {
-    console.log("Layout mounted - creating socket!");
-    this.socket = io();
-    console.log(this.socket);
   }
 
   render () {

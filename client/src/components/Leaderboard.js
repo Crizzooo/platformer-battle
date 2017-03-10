@@ -18,18 +18,18 @@ export function Leaderboard(props) {
       <td>{player.score}</td>
     </tr>);
   })
+  playerRows.push(...livePlayers);
 
-  let emptyRows = [];
   const livePlayerCount = livePlayers.length;
   for ( var i = 4 - livePlayerCount; i > 0; i--){
     console.log('pushing empty row at i', i);
-    emptyRows.push( (<tr key={'player' + (4 - i + 1)}>
-      <th scope="row">{1 + i}</th>
+    playerRows.push( (<tr key={'player' + (playerRows.length + 1)}>
+      <th scope="row">{playerRows.length + 1}</th>
       <td>Joinable Slot!</td>
       <td>--</td>
     </tr>))
   }
-  playerRows = [...livePlayers, ...emptyRows];
+  // playerRows = [...livePlayers, ...emptyRows];
   //4 - player count times, create empty rows
   console.log('Rendering playerRows:', playerRows);
   return (

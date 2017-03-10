@@ -15,18 +15,18 @@ import{ Router, Route, browserHistory, IndexRoute } from 'react-router';
 import store from './store.js';
 
 /* Actions to Dispatch */
-import { fetchPlayers, loadPlayers } from './reducers/index.js';
+import attachFunctions from './sockets.js';
 
-socket = io()
+socket = io();
+attachFunctions(socket);
+//call function to attach socket actions;
 
-function gettingPlayers() {
-  store.dispatch(fetchPlayers());
-}
+
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Layout} onEnter={ gettingPlayers }>
+      <Route path="/" component={Layout} >
        {
         //  <Route path="/leaderboard" component={Leaderboard} />
          /* Children Components */
