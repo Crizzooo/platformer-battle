@@ -18,8 +18,9 @@ const io = require('socket.io')(server);
   app.use(express.static(path.resolve(__dirname, '..', 'client')));
 }());
 
-//SERVER IN MEMORY STORAGE FOR GAME STATE MANAGEMENT
+//SERVER IN MEMORY STORAGE FOR GAME STATE MANAGEMENT & CHAT
 let players = [];
+let messages = [];
 
 
 //Initiate Socket with all functions for server
@@ -53,6 +54,20 @@ io.on('connection', (socket) => {
     players = R.filter( (player) => player.socketId !== socket.id, players);
     socket.emit('currentPlayer', {});
     io.emit('playerUpdate', players);
+  })
+
+  //TODO: emit all the messages in the array
+  //TODO: listen for new messages coming in and emit all the messages
+
+  socket.on('newMessageReceived', (message) => {
+    console.log('This message was received from client:', message)
+    //add the received message to the list of messages
+    //do we need a messages array?
+    // messages.push(message)
+
+    //send out the updated list of messages to all clients
+    io.emit('messagesUpdate', message)
+
   })
 })
 

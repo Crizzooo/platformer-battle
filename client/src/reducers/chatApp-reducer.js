@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const initialState = {
-  messages: ''
+  allMessages: []
 };
 
 /* Reducer */
@@ -12,8 +12,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case LOAD_MESSAGES:
-      newState.messages = action.messages;
+      newState.allMessages = action.allMessages;
       break;
+
+    case ADD_MESSAGE:
+      newState.allMessages = [...newState.allMessages, action.message]
 
     default:
       return state;
@@ -23,9 +26,11 @@ export default (state = initialState, action) => {
 
 /* Action Types */
 const LOAD_MESSAGES = 'LOAD_MESSAGES';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
 /* Action Creators */
-export const loadMessage = allMessages => ({ type: LOAD_MESSAGES, allMessages });
+export const loadMessages = allMessages => ({ type: LOAD_MESSAGES, allMessages });
+export const addMessage = message => ({ type: ADD_MESSAGE, message });
 
 /* Action Dispatchers */
 

@@ -14,10 +14,6 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
 
-    case CHANGE_MESSAGE:
-      newState.message = action.message;
-      break;
-
     case LOAD_PLAYERS:
       newState.allPlayers = action.allPlayers;
       break;
@@ -38,7 +34,6 @@ export default (state = initialState, action) => {
 };
 
 /* Action Types */
-const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 // const ADD_PLAYER = 'ADD_PLAYER';
 const LOAD_PLAYERS = 'LOAD_PLAYERS';
 const SET_CURRENT_PLAYER = 'SET_CURRENT_PLAYER';
