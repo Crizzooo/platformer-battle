@@ -6,9 +6,6 @@ import Header from '../components/Header';
 import Leaderboard from '../components/Leaderboard';
 import GameContainer from './gameContainer.jsx';
 
-
-
-
 class Layout extends Component {
 
   constructor(props) {
@@ -34,21 +31,8 @@ class Layout extends Component {
   }
 }
 
+//map functions if needed, remove at end if not used
+  // const mapProps = state => ({})
+  // const mapDispatch = {}
 
-const mapProps = state => {
-  return {
-    message: state.message
-  };
-
-};
-
-const mapDispatch = dispatch => ({
-  /*fetchInitialData: () => {
-    dispatch(fetchProducts());
-
-  }*/
-
-});
-
-
-export default connect(mapProps, mapDispatch)(Layout);
+export default connect()(Layout);

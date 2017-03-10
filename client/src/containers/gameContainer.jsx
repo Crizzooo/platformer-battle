@@ -7,7 +7,6 @@ class gameContainer extends Component {
     super(props);
   }
 
-
   render () {
     console.log('game container render');
     if(this.props.players && this.props.players.length >= 2) {
@@ -24,14 +23,19 @@ class gameContainer extends Component {
 
 const mapProps = state => {
   return {
-    players: state.players
+    players: state.players.allPlayers
   };
-
 };
 
-const mapDispatch = dispatch => ({
+/* Note on mapDispatch
+  below is short-hand for mapDispatch, creates key w/ value of anonymous function
+  that dispatches the function that was passed in*/
+const mapDispatch = {}
 
-});
+export default connect(mapProps)(gameContainer);
 
-
-export default connect(mapProps, mapDispatch)(gameContainer);
+/* Reference - full way to write mapDispatch
+  const mapDispatch = dispatch => ({
+    fetchInitialData: () => {
+      dispatch(fetchProducts());
+  }*/

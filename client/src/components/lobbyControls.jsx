@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { addPlayer, createNewPlayer, loadPlayers } from '../reducers/index.js';
-
-
 export class lobbyControls extends React.Component {
   constructor(props) {
     super(props)
@@ -79,14 +76,8 @@ export class lobbyControls extends React.Component {
 }
 
 const mapProps = state => ({
-  players: state.players,
-  currentPlayer: state.currentPlayer
+  players: state.players.allPlayers,
+  currentPlayer: state.players.currentPlayer
 });
 
-const mapDispatch = {
-  addPlayer,
-  loadPlayers
-};
-
-
-export default connect(mapProps, mapDispatch)(lobbyControls);
+export default connect(mapProps)(lobbyControls);

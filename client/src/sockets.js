@@ -1,6 +1,6 @@
 import store from './store.js';
 
-import { loadPlayers, setCurrentPlayer } from './reducers/index.js';
+import { loadPlayers, setCurrentPlayer } from './reducers/players-reducer.js';
 
 
 const attachFunctions = (socket) => {
