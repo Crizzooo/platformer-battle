@@ -37,10 +37,10 @@ export class lobbyControls extends React.Component {
         {
           /* check if current player or not */
           this.props.players && this.props.players.length < 4 && !this.props.currentPlayer.name ?
-            <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal"><span className="playBtnText">Join Game!</span></button>
+            <button type="button" className="btn btn-lg btn-info btn-danger btn-sm btn-block" data-target="#addPlayerModal" data-toggle="modal"><span className="playBtnText">Join Game!</span></button>
             :
             <div>
-              <button type="button" className="btn btn-lg btn-info btn-warning" onClick={this.handleLeaveGame}><span className="playBtnText">Leave Game!</span></button>
+              <button type="button" className="btn btn-lg btn-info btn-warning btn-sm btn-block" onClick={this.handleLeaveGame}><span className="playBtnText">Leave Game!</span></button>
               {this.props.players.length === 4 ?
               <h6>Maximum player count reached!</h6>
               :

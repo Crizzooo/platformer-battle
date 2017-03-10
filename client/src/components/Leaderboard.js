@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import LobbyControls from './lobbyControls';
+import ChatApp from './chatApp.jsx';
 
-export function Leaderboard(props) {
+function Leaderboard(props) {
   let players = props.players.sort((a, b) => b.score - a.score);
   let playerRows = [];
   //loop through player count - create player objects
@@ -50,7 +51,9 @@ export function Leaderboard(props) {
           </tbody>
         </table>
         <LobbyControls />
-
+        <div className="chatContainer">
+          <ChatApp />
+        </div>
       </div>
   )
 }
