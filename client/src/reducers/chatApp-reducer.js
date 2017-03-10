@@ -16,7 +16,8 @@ export default (state = initialState, action) => {
       break;
 
     case ADD_MESSAGE:
-      newState.allMessages = [...newState.allMessages, action.message]
+      newState.allMessages = [...newState.allMessages, action.message];
+      break;
 
     default:
       return state;

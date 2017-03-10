@@ -93,6 +93,17 @@ Then, give all components a relative height */
   height: 90%;
   border-radius: 10px;
   background-color: rgba(172, 172, 172, 0.18);
+  overflow-y: auto;
+  text-wrap: normal;
+}
+
+.messageList {
+  padding: 0px;
+  margin-bottom: 0.5rem;
+}
+
+.messageText {
+  margin-bottom: 0px;
 }
 
 #createMessage {

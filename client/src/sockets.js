@@ -22,9 +22,9 @@ function dispatchCurrentPlayer(playerObj) {
 
 //sample function
 
-function dispatchNewMessage(message) {
-  console.log('Store will receive a new message:', message)
-  store.dispatch(addMessage(message))
+export function dispatchNewMessage(msgObj) {
+  console.log('Store will receive a new message:', msgObj);
+  store.dispatch(addMessage(msgObj));
 }
 
 export default attachFunctions;

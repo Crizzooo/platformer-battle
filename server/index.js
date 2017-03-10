@@ -59,14 +59,10 @@ io.on('connection', (socket) => {
   //TODO: emit all the messages in the array
   //TODO: listen for new messages coming in and emit all the messages
 
-  socket.on('newMessageReceived', (message) => {
-    console.log('This message was received from client:', message)
-    //add the received message to the list of messages
-    //do we need a messages array?
-    // messages.push(message)
-    //send out the updated list of messages to all clients
-    io.emit('messagesUpdate', message)
-
+  socket.on('newChatMessage', (msgObjFromClient) => {
+    console.log('This message was received from client:', msgObjFromClient.message);
+    //emit message
+    io.emit('messagesUpdate', msgObjFromClient);
   })
 })
 
