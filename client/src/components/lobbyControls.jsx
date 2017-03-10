@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 
 import { addPlayer, createNewPlayer, loadPlayers } from '../reducers/index.js';
 
-import { socket } from '../index.js'
-
 
 export class lobbyControls extends React.Component {
   constructor(props) {
@@ -25,13 +23,10 @@ export class lobbyControls extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     createNewPlayer(this.state);
-
+    //socket emit
+    console.log(socket);
     $('#addPlayerModal').modal('hide');
 
-    socket.on('players Update', (players) => {
-      console.log(players)
-      this.props.loadPlayers(players)
-    })
   }
 
   render() {
