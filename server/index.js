@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-const apiRoutes = require('./apiRoutes');
-
 const app = express();
 
 const server = app.listen(3000, () => {
@@ -12,27 +9,38 @@ const server = app.listen(3000, () => {
 
 const io = require('socket.io')(server);
 
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+//middleware
+  app.use(bodyParser.urlencoded({extended: false}));
+  app.use(bodyParser.json());
+  // serve static assets normally
+  app.use(express.static(path.resolve(__dirname, '..', 'client')));
 
 io.on('connection', (socket) => {
   console.log('a user connected with socket:');
 
+// attach all functions to individual socket
   socket.on('disconnect', () => {
     console.log('a user has disconnected!');
   })
 })
 
-// serve static assets normally
-app.use(express.static(path.resolve(__dirname, '..', 'client')));
+//storage
+let players = [{name: 'Omer', score: 77}, {name: 'Amy', score: 88}];
+
+//gamestate routes
+app.get('/players', (req, res, next) => {
+  console.log('hit api players route with players obj', players);
+  res.status(201).send(players);
+});
+
+app.post('/player', (req, res, next) => {
+  players.push(req.body)
+  io.emit('players Update', players)
+  res.status(200).send();
+});
 
 
-app.use('/api', apiRoutes);
-
-
-
-
+//create functions for sockets
 
 
 

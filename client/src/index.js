@@ -14,15 +14,14 @@ import{ Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import store from './store.js';
 
-
-
 /* Actions to Dispatch */
-import { fetchPlayers } from './reducers/index.js';
+import { fetchPlayers, loadPlayers } from './reducers/index.js';
+
+socket = io()
 
 function gettingPlayers() {
   store.dispatch(fetchPlayers());
 }
-
 
 ReactDOM.render(
   <Provider store={store}>

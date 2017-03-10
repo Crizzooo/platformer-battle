@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { addPlayer, createNewPlayer } from '../reducers/index.js';
+import { addPlayer, createNewPlayer, loadPlayers } from '../reducers/index.js';
+
+import { socket } from '../index.js'
 
 
 export class lobbyControls extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        name: '',
-        score: 0
+      name: '',
+      score: 0
     };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,30 +19,34 @@ export class lobbyControls extends React.Component {
 
   handleChange(evt) {
     console.log(evt.target.value);
-    this.setState({name: evt.target.value})
+    this.setState({ name: evt.target.value })
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
     createNewPlayer(this.state);
+
     $('#addPlayerModal').modal('hide');
+
+    socket.on('players Update', (players) => {
+      console.log(players)
+      this.props.loadPlayers(players)
+    })
   }
-  
-// //onClick={() => props.addPlayer({name: 'Crizzo', score: 68})
-  // foo () {}
-  render(){
+
+  render() {
     return (
       <div>
-          {
-            /* check if current player or not */
-            this.props.players && this.props.players.length < 4 ?
-              <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal"><span className="playBtnText">Join Game!</span></button>
-              :
-              <div>
-                <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal" disabled><span className="playBtnText">Join Game!</span></button>
-                <h6>Maximum player count reached!</h6>
-              </div>
-          }
+        {
+          /* check if current player or not */
+          this.props.players && this.props.players.length < 4 ?
+            <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal"><span className="playBtnText">Join Game!</span></button>
+            :
+            <div>
+              <button type="button" className="btn btn-lg btn-info btn-danger" data-target="#addPlayerModal" data-toggle="modal" disabled><span className="playBtnText">Join Game!</span></button>
+              <h6>Maximum player count reached!</h6>
+            </div>
+        }
         <div className="modal fade" id="addPlayerModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -69,11 +75,12 @@ export class lobbyControls extends React.Component {
 }
 
 const mapProps = state => ({
-    players: state.players
+  players: state.players
 });
 
 const mapDispatch = {
-  addPlayer
+  addPlayer,
+  loadPlayers
 };
 
 

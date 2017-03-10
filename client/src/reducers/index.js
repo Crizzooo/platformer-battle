@@ -46,12 +46,12 @@ export const loadPlayers = players => ({type: LOAD_PLAYERS, players})
 /* Action Dispatchers */
 
 export const fetchPlayers = () => dispatch => {
-  return axios.get('/api/players')
+  return axios.get('/players')
   .then(response => response.data)
   .then(players => dispatch(loadPlayers(players)))
 };
 
 export const createNewPlayer = (player) => {
   console.log('createNewPlayer is sending: ', player);
-  axios.post('/api/player', player);
+  axios.post('/player', player);
 };
