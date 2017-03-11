@@ -4,8 +4,12 @@ import { connect } from 'react-redux';
 
 import { changeGamePlaying } from '../reducers/players-reducer.js';
 
+import BootState from '../gameStates/boot.js';
+import PreloadState from '../gameStates/preload.js';
+import MiniGameOneState from '../gameStates/minigame1/gameState.js';
+
 //declare global variable for game
-let game;
+
 class gameContainer extends Component {
 
   constructor(props) {
@@ -42,9 +46,17 @@ class gameContainer extends Component {
   //TODO: Remove elements in Game Container and replace with game
   //Flip redux state for game = true
   this.props.changeGamePlayState(true);
-   game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'game', {init: init, preload: preload, create: create, update: update});
-  };
+  console.log("what is PB before we start the game?");
+  PB.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'game');
+  PB.game.state.add('Boot', BootState);
+  PB.game.state.add('Preload', PreloadState);
+  PB.game.state.add('MiniGameOne', MiniGameOneState);
+  PB.game.state.start('Boot');
+  }
 }
+
+
+
 
 const mapProps = state => {
   return {
@@ -66,30 +78,3 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(mapProps, mapDispatch)(gameContainer);
-
-
-
-
-
-
-
-
-
-function init(){
-  this.game.stage.backgroundColor = '#da2dc3';
-  this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-  //TODO: WHAT DOES THIS SHIT DO?
-  // this.scale.pageAlignHorizontally = true;
-  // this.scale.pageAlignVertically = true;
-  this.game.physics.startSystem(Phaser.Physics.ARCADE);
-}
-
-function preload(){
-  this.load.image('preloadbar', 'assets/images/preloader-bar.png');
-}
-function create(){
-  const bar = this.game.add.sprite(game.centerX, game.centerY, 'preloadbar', 0);
-}
-function update(){
-  console.log('game running');
-}
