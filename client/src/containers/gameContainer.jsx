@@ -16,7 +16,7 @@ class gameContainer extends Component {
         </div>
       );
     } else {
-      return (<div className="col-md-6 gameContainer"><button type="button" className="btn btn-lg btn-info playButton" onClick={() => props.addPlayer({name: 'Crizzo', score: 68}) } disabled><span className="playBtnText">Play Game!</span></button><h6>Require Minimum Players: 2</h6></div>);
+      return (<div className="col-md-6 gameContainer"><button type="button" className="btn btn-lg btn-info playButton" onClick={() => {} } disabled><span className="playBtnText">Play Game!</span></button><h6>Require Minimum Players: 2</h6></div>);
     }
   }
 }
