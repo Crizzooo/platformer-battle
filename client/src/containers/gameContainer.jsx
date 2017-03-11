@@ -36,27 +36,20 @@ class gameContainer extends Component {
       //Game is Currently Playing
       return (<div className="col-md-6 gameContainer">
         <div id="game">
-
         </div>
       </div>);
     }
+    if(this.props.gamePlaying) {
+      this.startGame(this.props.players)
+    }
   }
 
-  startGame() {
+  startGame(players) {
   //TODO: Remove elements in Game Container and replace with game
   //Flip redux state for game = true
-  this.props.changeGamePlayState(true);
-  console.log("what is PB before we start the game?");
-  PB.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'game');
-  PB.game.state.add('Boot', BootState);
-  PB.game.state.add('Preload', PreloadState);
-  PB.game.state.add('MiniGameOne', MiniGameOneState);
-  PB.game.state.start('Boot');
+  socket.emit('gameIsStarting', this.props.players)
   }
 }
-
-
-
 
 const mapProps = state => {
   return {

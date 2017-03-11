@@ -22,7 +22,6 @@ const io = require('socket.io')(server);
 let players = [];
 let messages = [];
 
-
 //Initiate Socket with all functions for server
 io.on('connection', (socket) => {
   console.log('a user connected with socketID', socket.id);
@@ -67,8 +66,11 @@ io.on('connection', (socket) => {
     //emit message
     io.emit('messagesUpdate', msgObjFromClient);
   })
-})
 
+  socket.on('gameIsStarting', (players) => {
+    io.emit('gameIsStarting', players)
+  })
+})
 
 //gamestate routes
 //TODO: replace route with 'loadPlayers'

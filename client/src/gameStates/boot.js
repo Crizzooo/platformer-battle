@@ -2,8 +2,8 @@
 
 
 
-const init = () => {
-  console.log('init function ran')
+const init = (players) => {
+  console.log('init function ran with:', players)
   PB.game.stage.backgroundColor = '#da2dc3';
   PB.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
   //TODO: WHAT DOES THIS SHIT DO?
