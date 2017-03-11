@@ -25,10 +25,15 @@ attachFunctions(socket);
 
 
 
+const getPlayers = () => {
+  console.log('getting Players');
+  socket.emit('getPlayers');
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Layout} >
+      <Route path="/" component={Layout} onEnter={getPlayers} >
        {
         //  <Route path="/leaderboard" component={Leaderboard} />
          /* Children Components */

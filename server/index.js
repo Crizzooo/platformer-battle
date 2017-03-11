@@ -27,7 +27,6 @@ let messages = [];
 io.on('connection', (socket) => {
   console.log('a user connected with socketID', socket.id);
   // emit player update to specific socket
-  socket.emit('playerUpdate', players);
 
   //TODO: Call function that attaches all functions to socket
   socket.on('disconnect', () => {
@@ -56,9 +55,13 @@ io.on('connection', (socket) => {
     io.emit('playerUpdate', players);
   })
 
+  socket.on('getPlayers', () => {
+    console.log('server is sending players:', players);
+    socket.emit('playerUpdate', players);
+  })
+
   //TODO: emit all the messages in the array
   //TODO: listen for new messages coming in and emit all the messages
-
   socket.on('newChatMessage', (msgObjFromClient) => {
     console.log('This message was received from client:', msgObjFromClient.message);
     //emit message
