@@ -1,6 +1,6 @@
 /* Variables */
 $button-height: 40px;
-$container-height: 80vh;
+$container-height: 83vh;
 
 * {
   display: border-box;
@@ -45,8 +45,9 @@ body {
 }
 
 .gameContainer {
-  height: 83vh;
+  height: $container-height;
   // padding-top: calc(100% - $button-height);
+  padding: 0px;
   background-color: black;
   box-sizing: border-box;
 }
@@ -60,6 +61,16 @@ body {
   display: block;
   box-sizing: border-box;
   padding: 5px;
+}
+
+#game {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+canvas {
+  margin: 0;
 }
 
 .playBtnText {
