@@ -50,13 +50,16 @@ body {
   font-size: 1em; }
 
 /* Chat App Styles */
+/* TODO: Resize Leaderboard Components by wrapping in Div with same VH as gameContainer
+Then, give all components a relative height */
 .chatContainer {
+  height: 50%;
   margin-top: 10px; }
 
 .chatComponents {
   display: border-box;
   border-radius: 10px;
-  height: 40vh;
+  height: 100%;
   margin: 5px; }
 
 .messageForm {
@@ -67,7 +70,16 @@ body {
   padding: 5px;
   height: 90%;
   border-radius: 10px;
-  background-color: rgba(172, 172, 172, 0.18); }
+  background-color: rgba(172, 172, 172, 0.18);
+  overflow-y: auto;
+  text-wrap: normal; }
+
+.messageList {
+  padding: 0px;
+  margin-bottom: 0.5rem; }
+
+.messageText {
+  margin-bottom: 0px; }
 
 #createMessage {
   border: 0;
@@ -84,4 +96,4 @@ body {
 
 .chatFooter {
   margin-top: 5px;
-  height: 60px; }
+  height: 10%; }
