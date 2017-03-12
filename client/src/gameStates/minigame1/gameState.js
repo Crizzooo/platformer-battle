@@ -1,6 +1,4 @@
-let customParams = {};
-
-let player;
+let currentPlayer;
 
 const init = (msg) => {
   console.log('PB Custom Params:', PB.customParams);
@@ -15,6 +13,7 @@ const init = (msg) => {
 
   //cursor keys
   // PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
+  socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
 }
 
 const preload = () => {
@@ -23,29 +22,28 @@ const preload = () => {
 
 const create = () => {
   //create game set up
-  socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
   loadLevel();
 }
 const update = () => {
-  player.body.velocity.x = 0;
+  currentPlayer.body.velocity.x = 0;
   if(PB.game.cursors.left.isDown){
-    player.body.velocity.x = -customParams.RUNNING_SPEED;
-    player.scale.setTo(1, 1);
-    player.play('walking');
+    currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
+    currentPlayer.scale.setTo(1, 1);
+    currentPlayer.play('walking');
   } else if(PB.game.cursors.right.isDown){
-    player.body.velocity.x = customParams.RUNNING_SPEED;
-    player.scale.setTo(-1, 1);
-    player.play('walking');
+    currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
+    currentPlayer.scale.setTo(-1, 1);
+    currentPlayer.play('walking');
   }
   else {
-    player.animations.stop();
-    player.frame = 3;
+    currentPlayer.animations.stop();
+    currentPlayer.frame = 3;
   }
 
   if (PB.game.cursors.up.isDown){
-    player.body.velocity.y = -customParams.JUMPING_SPEED;
-    player.scale.setTo(1, -1);
-    player.play('walking');
+    currentPlayer.body.velocity.y = -PB.customParams.JUMPING_SPEED;
+    currentPlayer.scale.setTo(1, -1);
+    currentPlayer.play('walking');
   }
 }
 
@@ -59,24 +57,33 @@ const MiniGameOneState = {
 
 export default MiniGameOneState;
 
+const playerData = [{x: 30, y: 30}, {x: 50, y: 50}, {x: 80, y: 80}, {x: 110, y: 110}];
+
 const loadLevel = () => {
-  console.log()
   //need a player group
-
+  PB.game.playersGroup = PB.game.add.group();
+  PB.game.playersGroup.enableBody = true;
       //for each player in players
+      PB.customParams.players.forEach( (playerObj, index) => {
+        //if player is the current player
+        //TODO: Change sprite on each iteration to be a color]
+        console.log('Creating Player: ', playerObj);
+        const playerToAdd = PB.game.playersGroup.create(playerData[index].x, playerData[index].y, 'player');
 
-          //if player is the current player
-                //they get the cursor keys
+        // playerToAdd.body.gravity.y =
+
+        if (playerObj.socketId === socket.id){
+          console.log('My current Player is: ', playerObj);
+          currentPlayer = playerToAdd;
+          //the cursor keys will only move currentPlayer
+          PB.game.camera.follow(currentPlayer);
+        }
 
         //all players get a physics body
-
-
-  player = PB.game.add.sprite(PB.game.world.centerX, PB.game.world.centerY, 'player', 3);
-  player.anchor.setTo(0.5);
-  player.scale.setTo(3);
-  player.animations.add('walking', [0, 1, 2, 1], 6, true);
-  PB.game.physics.arcade.enable(player);
-  player.body.collideWorldBounds = true;
-
-  PB.game.camera.follow(player);
+        playerToAdd.anchor.setTo(0.5);
+        playerToAdd.scale.setTo(3);
+        playerToAdd.animations.add('walking', [0, 1, 2, 1], 6, true);
+        playerToAdd.body.collideWorldBounds = true;
+      });
+  console.log('Group of players = ', PB.game.playersGroup);
 };

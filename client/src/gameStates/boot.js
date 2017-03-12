@@ -26,12 +26,6 @@ const update = () => {
   PB.game.state.start('Preload');
 }
 
-
-
-
-
-
-
 const BootState = {
   init,
   preload,
