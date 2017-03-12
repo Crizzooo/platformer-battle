@@ -4,7 +4,8 @@ let remotePlayers = [];
 let score = 0;
 let scoreText;
 //take out text if we don't need, score can still be tracked
-//implement timer, at end of timer show scores? or just declare 'PLAYER NAME IS WINNER'
+//implement timer, at end of timer show scores? or just declare "PLAYER 'NAME' IS WINNER"
+
 const initScore = () => {
   scoreText = PB.game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 }
