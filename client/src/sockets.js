@@ -1,6 +1,7 @@
 import store from './store.js';
 import { loadPlayers, setCurrentPlayer, changeGamePlaying } from './reducers/players-reducer.js';
 import { loadMessages, addMessage } from './reducers/chatApp-reducer.js';
+import { dispatchGameUpdate } from './reducers/gameState-reducer.js';
 
 import BootState from './gameStates/boot.js';
 import PreloadState from './gameStates/preload.js';
@@ -13,6 +14,7 @@ const attachFunctions = (socket) => {
   socket.on('messagesUpdate', dispatchNewMessage);
   socket.on('turnOnGameComponent', dispatchGameTrue);
   socket.on('startGame', startClientGame);
+  socket.on('GameStateChange', dispatchNewGameState);
 };
 
 function dispatchPlayerUpdates(players) {
@@ -26,7 +28,6 @@ function dispatchCurrentPlayer(playerObj) {
 }
 
 //sample function
-
 export function dispatchNewMessage(msgObj) {
   store.dispatch(addMessage(msgObj));
 }
@@ -42,6 +43,11 @@ function startClientGame(players) {
   PB.game.state.add('Preload', PreloadState);
   PB.game.state.add('MiniGameOne', MiniGameOneState);
   PB.game.state.start('Boot', true, false, players);
+}
+
+function dispatchNewGameState(playerObjects) {
+  console.log('client received:', playerObjects);
+  store.dispatch(dispatchGameUpdate(playerObjects));
 }
 
 export default attachFunctions;

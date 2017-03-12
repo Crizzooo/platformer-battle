@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const R = require('ramda');
+const throttle = require('lodash.throttle');
 
 const server = app.listen(3000, () => {
   console.log('listening on *:3000');
@@ -71,27 +72,31 @@ io.on('connection', (socket) => {
     io.emit('turnOnGameComponent');
     io.emit('startGame', players)
   })
+
+  socket.on('playerMoving', (playerObj) => {
+    // console.log('current server players state:', players);
+    // console.log('looking for ', playerObj);
+    var indexToUpdate = findPlayer(playerObj.socketId);
+    // console.log('findPlayer id:', indexToUpdate);
+    players[indexToUpdate].x = playerObj.x;
+    players[indexToUpdate].y = playerObj.y;
+    console.log('sending updated player:', players[indexToUpdate]);
+    throttledStateChange();
+  });
 })
 
-//gamestate routes
-//TODO: replace route with 'loadPlayers'
-app.get('/players', (req, res, next) => {
-  console.log('hit api players route with players obj', players);
-  res.status(201).send(players);
-});
 
-
-//TODO: replace route with on 'createPlayer'
-app.post('/player', (req, res, next) => {
-  players.push(req.body)
-  io.emit('players Update', players)
-  res.status(200).send();
-});
-
+var throttledStateChange = throttle(emitStateChange, 35);
 
 //create functions for sockets
+function findPlayer(socketId){
+  console.log('Searching in:', players, ' for ', socketId);
+  return R.findIndex(R.propEq('socketId', socketId))(players);
+}
 
-
+function emitStateChange(){
+  io.emit('GameStateChange', players);
+}
 
 
 
