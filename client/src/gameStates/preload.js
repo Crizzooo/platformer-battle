@@ -13,6 +13,9 @@ const preload = () => {
   PB.game.preloadBar.anchor.setTo(0.5);
   PB.game.preloadBar.scale.setTo(5);
   PB.game.load.setPreloadSprite(PB.game.preloadBar);
+  PB.game.load.image('iceBall', '../../assets/images/IceBall.png');
+  PB.game.load.image('iceCube', '../../assets/images/iceCubeSprite.png');
+  PB.game.load.image('star', '../../assets/images/starSprite.png');
 
   //load level assets
   // PB.game.load.image('gameTiles', '../../assets/images/tiles_spritesheet.png');

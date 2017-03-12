@@ -156,8 +156,12 @@ const loadLevel = () => {
   PB.game.platform2.body.allowGravity = false;
   PB.game.platform2.body.immovable = true;
 
-
-
+  PB.game.star = PB.game.add.sprite(30, 250, 'star');
+  PB.game.star.scale.setTo(0.5);
+  PB.game.iceCube = PB.game.add.sprite(100, 350, 'iceCube');
+  PB.game.iceCube.scale.setTo(0.15);
+  PB.game.iceBall = PB.game.add.sprite(100, 300,'iceBall');
+  PB.game.iceBall.scale.setTo(0.1);
   //load players & remote players
   PB.game.playersGroup = PB.game.add.group();
   PB.game.playersGroup.enableBody = true;
