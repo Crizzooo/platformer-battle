@@ -30,7 +30,7 @@ export class lobbyControls extends React.Component {
   }
 
   render() {
-    console.log('What is currentPlayer evaluate to:', this.props.currentPlayer);
+    console.log('Current Player:', this.props.currentPlayer);
 
     return (
       <div>

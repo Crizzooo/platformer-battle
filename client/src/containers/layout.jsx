@@ -13,7 +13,6 @@ class Layout extends Component {
   }
 
   render () {
-    console.log('layout rendering');
     return (
       <div>
         <Header />

@@ -4,6 +4,7 @@ let player;
 
 const init = (msg) => {
   console.log('Launching Mini Game One!');
+  console.log('Custom Params Players:', PB.customParams.players);
   customParams.msg = msg;
 
   //set constants for game
@@ -27,7 +28,7 @@ const create = () => {
   loadLevel();
 }
 const update = () => {
-  console.log('game running');
+  console.log('mini game one update running');
 
   player.body.velocity.x = 0;
   if(PB.game.cursors.left.isDown){

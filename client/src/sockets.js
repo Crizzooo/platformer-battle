@@ -10,18 +10,18 @@ import MiniGameOneState from './gameStates/minigame1/gameState.js';
 const attachFunctions = (socket) => {
   socket.on('playerUpdate', dispatchPlayerUpdates);
   socket.on('currentPlayer', dispatchCurrentPlayer);
-  socket.on('messagesUpdate', dispatchNewMessage)
-  socket.on('gameIsStarting', dispatchNewGame)
+  socket.on('messagesUpdate', dispatchNewMessage);
+  socket.on('turnOnGameComponent', dispatchGameTrue);
+  socket.on('startGame', startClientGame);
 };
 
 function dispatchPlayerUpdates(players) {
-  console.log('Socket received players from server:', players);
+  console.log('Received Players:', players);
   //dispatch loadPlayers with players
   store.dispatch(loadPlayers(players));
 }
 
 function dispatchCurrentPlayer(playerObj) {
-  console.log('Store will receive current Player:', playerObj);
   store.dispatch(setCurrentPlayer(playerObj));
 }
 
@@ -32,9 +32,17 @@ export function dispatchNewMessage(msgObj) {
   store.dispatch(addMessage(msgObj));
 }
 
-function dispatchNewGame(players) {
-  store.dispatch(changeGamePlaying(true))
+// function dispatchNewGame(players) {
+//   store.dispatch(changeGamePlaying(true));
+// }
 
+function dispatchGameTrue(){
+  console.log('Sockets are telling game component to render!');
+  store.dispatch(changeGamePlaying(true));
+}
+
+function startClientGame(players) {
+  console.log('Sockets are starting games with Players:', players);
   PB.game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'game');
   PB.game.state.add('Boot', BootState);
   PB.game.state.add('Preload', PreloadState);
