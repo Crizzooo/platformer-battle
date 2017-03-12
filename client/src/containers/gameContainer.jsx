@@ -37,10 +37,6 @@ class gameContainer extends Component {
         </div>
       </div>);
     }
-    if(this.props.gamePlaying) {
-      console.log('starting Game - unreachable???');
-      this.startGame(this.props.players)
-    }
   }
 
   startGame(players) {
@@ -53,7 +49,8 @@ class gameContainer extends Component {
 const mapProps = state => {
   return {
     players: state.players.allPlayers,
-    gamePlaying: state.players.gamePlaying
+    gamePlaying: state.players.gamePlaying,
+    currentPlayer: state.players.currentPlayer
   };
 };
 

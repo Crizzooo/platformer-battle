@@ -3,13 +3,12 @@ let customParams = {};
 let player;
 
 const init = (msg) => {
-  console.log('Launching Mini Game One!');
-  console.log('Custom Params Players:', PB.customParams.players);
-  customParams.msg = msg;
+  console.log('PB Custom Params:', PB.customParams);
+  PB.customParams.msg = msg;
 
   //set constants for game
-  customParams.RUNNING_SPEED = 180;
-  customParams.JUMPING_SPEED = 100;
+  PB.customParams.RUNNING_SPEED = 180;
+  PB.customParams.JUMPING_SPEED = 100;
 
   //initiate physics
   PB.game.physics.arcade.gravity.y = 1000;
@@ -24,12 +23,10 @@ const preload = () => {
 
 const create = () => {
   //create game set up
-  socket.emit('newChatMessage', {message: customParams.msg, name: 'PHASER GAME'});
+  socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
   loadLevel();
 }
 const update = () => {
-  console.log('mini game one update running');
-
   player.body.velocity.x = 0;
   if(PB.game.cursors.left.isDown){
     player.body.velocity.x = -customParams.RUNNING_SPEED;
@@ -64,6 +61,16 @@ export default MiniGameOneState;
 
 const loadLevel = () => {
   console.log()
+  //need a player group
+
+      //for each player in players
+
+          //if player is the current player
+                //they get the cursor keys
+
+        //all players get a physics body
+
+
   player = PB.game.add.sprite(PB.game.world.centerX, PB.game.world.centerY, 'player', 3);
   player.anchor.setTo(0.5);
   player.scale.setTo(3);

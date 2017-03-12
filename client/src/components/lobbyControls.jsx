@@ -23,10 +23,19 @@ export class lobbyControls extends React.Component {
     console.log('Client is emitting this player obj:', this.state);
     socket.emit('playerJoined', this.state);
     $('#addPlayerModal').modal('hide');
+    $('#playerNameInput').val('');
   }
 
   handleLeaveGame(evt) {
     socket.emit('playerLeaveGame', this.props.currentPlayer);
+  }
+
+  componentDidMount() {
+    $('#addPlayerModal').on('shown.bs.modal', function () {
+      // get the locator for an input in your modal. Here I'm focusing on
+      // the element with the id of myInput
+      $('#playerNameInput').focus()
+    });
   }
 
   render() {
@@ -48,7 +57,7 @@ export class lobbyControls extends React.Component {
               }
             </div>
         }
-        <div className="modal fade" id="addPlayerModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="addPlayerModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
@@ -61,7 +70,7 @@ export class lobbyControls extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Name</label>
-                    <input type="name" onChange={this.handleChange} className="form-control" id="playerNameInput" aria-describedby="namePlayer" placeholder="insert creative name here" />
+                    <input type="text" name="name" onChange={this.handleChange} className="form-control" id="playerNameInput" aria-describedby="namePlayer" placeholder="insert creative name here" autoFocus />
                     <small id="namePlayer" className="form-text text-muted">please dont feed the trolls</small>
                   </div>
                   <button type="submit" className="btn btn-primary">Submit</button>

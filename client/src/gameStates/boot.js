@@ -2,17 +2,13 @@
 
 
 
-const init = (players) => {
-  PB.customParams = {
-    players: []
-  }
+const init = () => {
   PB.game.stage.backgroundColor = '#da2dc3';
   PB.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
   //TODO: WHAT DOES THIS SHIT DO?
   // PB.scale.pageAlignHorizontally = true;
   // PB.scale.pageAlignVertically = true;
   PB.game.physics.startSystem(Phaser.Physics.ARCADE);
-  PB.customParams.players = players;
 }
 
 const preload = () => {
