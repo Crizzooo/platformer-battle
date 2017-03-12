@@ -68,7 +68,8 @@ io.on('connection', (socket) => {
   })
 
   socket.on('gameIsStarting', (players) => {
-    io.emit('gameIsStarting', players)
+    io.emit('turnOnGameComponent');
+    io.emit('startGame', players)
   })
 })
 

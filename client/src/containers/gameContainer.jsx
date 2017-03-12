@@ -18,28 +18,27 @@ class gameContainer extends Component {
   }
 
   render () {
-    console.log('game container render');
     //TODO: REIMPLEMENT DISABLED ATTRIB ON FALSY RETURN
     if(this.props.gamePlaying === false){
       if(this.props.players && this.props.players.length >= 2) {
-        console.log('enough players');
         return(
           <div className="col-md-6 gameContainer">
             <button type="button" className="btn btn-lg btn-info playButton" onClick={this.startGame}><span className="playBtnText">Play Game!</span></button>
           </div>
         );
       } else {
-        console.log('not enough players');
         return (<div className="col-md-6 gameContainer"><button type="button" className="btn btn-lg btn-info playButton" onClick={this.startGame} ><span className="playBtnText">Play Game!</span></button><h6>Require Minimum Players: 2</h6></div>);
       }
     } else {
       //Game is Currently Playing
+      console.log('There is a game going on!');
       return (<div className="col-md-6 gameContainer">
         <div id="game">
         </div>
       </div>);
     }
     if(this.props.gamePlaying) {
+      console.log('starting Game - unreachable???');
       this.startGame(this.props.players)
     }
   }

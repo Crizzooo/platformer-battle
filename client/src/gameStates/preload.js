@@ -16,7 +16,6 @@ const preload = () => {
 }
 const create = () => {
   //launch next game state;
-  console.log('launching MGO');
   PB.game.state.start('MiniGameOne', true, false, 'Launching Mini Game One \nEnjoy Yourselves!');
 }
 const update = () => {

@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case LOAD_PLAYERS:
-      console.log('store received LOAD PLAYERS with', action.allPlayers);
       newState.allPlayers = action.allPlayers;
       break;
 
