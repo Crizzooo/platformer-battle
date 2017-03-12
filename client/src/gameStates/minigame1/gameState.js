@@ -5,7 +5,10 @@ let remotePlayers = [];
 
 const updatePlayers = (arrPlayerData) => {
   console.log('updating players');
-  let playersToUpdate = arrPlayerData.filter( (player) => player.socketId !== currentPlayer.socketId);
+  let playersToUpdate = arrPlayerData;
+  if (currentPlayer) {
+    playersToUpdate = arrPlayerData.filter( (player) => player.socketId !== currentPlayer.socketId);
+  }
   playersToUpdate.forEach( (player) => {
     let movingPlayerSprite = findPlayer(player.socketId);
     console.log("received state:", player);
@@ -111,69 +114,6 @@ const update = () => {
     console.log('player jumping:', isJumping);
   }
 }
-
-
-  /*let dir;
-  if(PB.game.cursors.left.isDown){
-    isMoving = true;
-    currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
-    currentPlayer.scale.setTo(1, 1);
-    currentPlayer.play('walking');
-    dir = -1;
-  } else if(PB.game.cursors.right.isDown){
-    isMoving = true;
-    currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
-    currentPlayer.scale.setTo(-1, 1);
-    currentPlayer.play('walking');
-    dir = 1;
-  }
-  else {
-    console.log('player stopped moving');
-    isMoving = false;
-    currentPlayer.body.velocity.x = 0;
-    currentPlayer.animations.stop();
-    currentPlayer.frame = 3;
-    dir = 0;
-  }
-
-  if (PB.game.cursors.up.isDown){
-    isMoving = true;
-    isJumping = true;
-    currentPlayer.body.velocity.y = -PB.customParams.JUMPING_SPEED;
-    currentPlayer.scale.setTo(1, -1);
-    currentPlayer.play('walking');
-  } else {
-    isJumping = false;
-    currentPlayer.body.velocity.y = 0;
-    currentPlayer.body.gravity.y = GRAVITY;
-  }
-
-  if (isMoving || isJumping) {
-    console.log(currentPlayer);
-    // socket.emit('playerMoving', {socketId: socket.id, x: currentPlayer.x, y: currentPlayer.y});
-    console.log('player moving, emitting!');
-    socket.emit('playerMoving', {
-      socketId: socket.id,
-      x: currentPlayer.x,
-      y: currentPlayer.y,
-      xVelocity: currentPlayer.body.velocity.x,
-      yVelocity: currentPlayer.body.velocity.y,
-      dir: dir});
-  }
-
-  console.log('Player State in Phaser:', PB.customParams.players);
-  console.log('Player Group:', PB.game.playersGroup.children);
-  PB.customParams.players.forEach( (player) => {
-    console.log('looping over this guy:', player);
-    var playerIndexToUpdate = findPlayer(player.socketId);
-    console.log('what does a player look like?', PB.game.playersGroup.children);
-    PB.game.playersGroup.children[playerIndexToUpdate].x = player.x;
-    PB.game.playersGroup.children[playerIndexToUpdate].y = player.y;
-    PB.game.playersGroup.children[playerIndexToUpdate].body.velocity.y = player.velocityY;
-    PB.game.playersGroup.children[playerIndexToUpdate].body.velocity.x = player.velocityX;
-    PB.game.playersGroup.children[playerIndexToUpdate].scale.setTo(player.dir);
-  })*/
-
 
 function findPlayer(socketId){
   return R.find(R.propEq('socketId', socketId))(PB.game.playersGroup.children);
