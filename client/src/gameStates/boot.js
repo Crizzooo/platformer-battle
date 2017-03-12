@@ -20,6 +20,7 @@ const create = function() {
   PB.game.preloadBar.anchor.setTo(0.5);
   PB.game.preloadBar.scale.setTo(5);
   PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
+  PB.game.cursors.spacebar = PB.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 }
 const update = () => {
   console.log('game running');
