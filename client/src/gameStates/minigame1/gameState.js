@@ -1,7 +1,13 @@
 const R = require('ramda');
 let currentPlayer;
 let remotePlayers = [];
-
+let score = 0;
+let scoreText;
+//take out text if we don't need, score can still be tracked
+//implement timer, at end of timer show scores? or just declare 'PLAYER NAME IS WINNER'
+const initScore = () => {
+  scoreText = PB.game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+}
 
 const updatePlayers = (arrPlayerData) => {
   console.log('updating players');
@@ -50,6 +56,8 @@ const preload = () => {
 const create = () => {
   //create game set up
   loadLevel();
+  initStars();
+  initScore();
 }
 
 var isMoving = false;
@@ -58,6 +66,7 @@ const update = () => {
   PB.game.physics.arcade.collide(PB.game.playersGroup);
   PB.game.physics.arcade.collide(PB.game.playersGroup, PB.game.platform1);
   PB.game.physics.arcade.collide(PB.game.playersGroup, PB.game.platform2);
+  PB.game.physics.arcade.collide(PB.game.stars, PB.game.playersGroup, starPlayerCollision)
 
   if (currentPlayer != null && currentPlayer.alive == true){
     console.log('Player is alive');
@@ -204,3 +213,42 @@ const freeze = (playerSprite) => {
   playerSprite.animations.stop();
   playerSprite.body.velocity.x = 0;
 }
+
+const initStars = () => {
+  PB.game.stars = PB.game.add.group()
+  PB.game.stars.enableBody = true;
+  PB.game.time.events.loop(Phaser.Timer.SECOND * 2, createStarOnTimer, PB.Star)
+}
+
+function createStars(x, y) {
+  var star = PB.game.stars.getFirstExists(false);
+  if(!star) {
+    star = new PB.Star(PB.game, x, y)
+    star.scale.setTo(0.5)
+    PB.game.stars.add(star)
+    console.log('create star');
+  } else {
+    star.reset(x, y)
+  }
+}
+
+
+
+var arrStarPositions = [{x: 30, y: 30}, {x: 50, y: 50}, {x: 90, y: 400}, {x: 180, y: 180}]
+
+
+function createStarOnTimer() {
+  let randNum = Math.floor(Math.random() * 4)
+  var x = arrStarPositions[randNum].x
+  var y = arrStarPositions[randNum].y
+  createStars(x, y)
+}
+
+function starPlayerCollision(star, player) {
+  star.kill();
+  score += 10;
+  scoreText.text = 'Score: ' + score;
+}
+
+
+
