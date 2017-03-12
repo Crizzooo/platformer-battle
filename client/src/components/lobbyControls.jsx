@@ -38,7 +38,7 @@ export class lobbyControls extends React.Component {
     console.log('Current Player:', this.props.currentPlayer);
 
     return (
-      <div>
+      <div id="buttonHolder">
         {
           /* check if current player or not */
           this.props.players && this.props.players.length < 4 && !this.props.currentPlayer.name ?

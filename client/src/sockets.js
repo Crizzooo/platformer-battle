@@ -14,7 +14,7 @@ const attachFunctions = (socket) => {
   socket.on('messagesUpdate', dispatchNewMessage);
   socket.on('turnOnGameComponent', dispatchGameTrue);
   socket.on('startGame', startClientGame);
-  socket.on('GameStateChange', dispatchNewGameState);
+  // socket.on('GameStateChange', dispatchNewGameState);
 };
 
 function dispatchPlayerUpdates(players) {
