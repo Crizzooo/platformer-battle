@@ -57,7 +57,7 @@ class ChatApp extends React.Component {
               </ul>
             </div>
             <div className="chatFooter">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit} id="chatForm">
                 <div className="messageForm">
                   <input id="createMessage" autoComplete="off" placeholder="Talk some smack here..." onChange={this.handleChange} />
                   {

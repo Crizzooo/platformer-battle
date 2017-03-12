@@ -1,9 +1,9 @@
 /* Variables */
 $button-height: 40px;
-$container-height: 83vh;
+$container-height: 100%;
 
 * {
-  display: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -32,16 +32,27 @@ body {
 
 .table {
   margin-bottom: 10px;
+  height: 40%;
 }
 
 /* Main Container Styles */
 
 .mainContainer {
   margin-top: 20px;
+  height: 650px;
+}
+
+#mainRow {
+  height: 85%;
 }
 
 .leaderboard {
   height: $container-height;
+  box-sizing: border-box;
+}
+
+#buttonHolder {
+  height: 5%;
 }
 
 .gameContainer {
@@ -53,11 +64,8 @@ body {
 }
 
 .playButton {
-  height: $button-height;
-  width: 42%;
-  margin: 0 auto;
-  margin-top: calc(calc(#{$container-height} / 2) - #{$button-height});
-  margin-bottom: calc(calc(#{$container-height} / 2) - #{$button-height});
+  height: 40px;
+  margin: calc( (100% / 2) - 40px) auto;
   display: block;
   box-sizing: border-box;
   padding: 5px;
@@ -88,7 +96,7 @@ Then, give all components a relative height */
 }
 
 .chatComponents {
-  display: border-box;
+  box-sizing: border-box;
   border-radius: 10px;
   height: 100%;
   margin: 5px;
@@ -97,11 +105,12 @@ Then, give all components a relative height */
 .messageForm {
   padding: 3px;
   border: 1px dashed rgba(0, 0, 0, 0.2);
+  height: 100%;
 }
 
 #messageDisplay {
   padding: 5px;
-  height: 90%;
+  height: 79%;
   border-radius: 10px;
   background-color: rgba(172, 172, 172, 0.18);
   overflow-y: auto;
@@ -123,7 +132,9 @@ Then, give all components a relative height */
   width: 75%;
   margin-right: 0.5%;
 }
-
+#chatForm {
+  height: 100%;
+}
 #sendMessage {
   width: 24%;
   padding: 10px;
@@ -135,5 +146,5 @@ Then, give all components a relative height */
 
 .chatFooter {
   margin-top: 5px;
-  height: 10%;
+  height: 18%;
 }

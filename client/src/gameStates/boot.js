@@ -13,13 +13,13 @@ const init = () => {
 
 const preload = () => {
   PB.game.load.image('preloadbar', 'assets/images/preloader-bar.png');
-  PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
 }
 
 const create = function() {
   PB.game.preloadBar = PB.game.add.sprite(PB.game.world.centerX, PB.game.world.centerY, 'preloadbar', 0);
   PB.game.preloadBar.anchor.setTo(0.5);
   PB.game.preloadBar.scale.setTo(5);
+  PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
 }
 const update = () => {
   console.log('game running');

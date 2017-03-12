@@ -78,18 +78,24 @@ io.on('connection', (socket) => {
     // console.log('looking for ', playerObj);
     var indexToUpdate = findPlayer(playerObj.socketId);
     // console.log('findPlayer id:', indexToUpdate);
-    players[indexToUpdate].x = playerObj.x;
-    players[indexToUpdate].y = playerObj.y;
-    players[indexToUpdate].velocityY = playerObj.y;
-    players[indexToUpdate].velocityX = playerObj.x;
-    players[indexToUpdate].dir = playerObj.dir;
+    var movingPlayer = players[indexToUpdate];
+    if (!movingPlayer) {
+      return;
+    }
+    movingPlayer.x = playerObj.x;
+    movingPlayer.y = playerObj.y;
+    movingPlayer.velocityY = playerObj.velocityY;
+    movingPlayer.velocityX = playerObj.velocityX;
+    movingPlayer.dir = playerObj.dir;
+    movingPlayer.hasMoved = true;
     console.log('sending updated player:', players[indexToUpdate]);
+    // emitStateChange();
     throttledStateChange();
   });
 })
 
 
-var throttledStateChange = throttle(emitStateChange, 35);
+var throttledStateChange = throttle(emitStateChange, 5);
 
 //create functions for sockets
 function findPlayer(socketId){

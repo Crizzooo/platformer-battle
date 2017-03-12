@@ -1,6 +1,6 @@
 /* Variables */
 * {
-  display: border-box; }
+  box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -22,27 +22,33 @@ body {
   font-size: large; }
 
 .table {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  height: 40%; }
 
 /* Main Container Styles */
 .mainContainer {
-  margin-top: 20px; }
+  margin-top: 20px;
+  height: 650px; }
+
+#mainRow {
+  height: 85%; }
 
 .leaderboard {
-  height: 83vh; }
+  height: 100%;
+  box-sizing: border-box; }
+
+#buttonHolder {
+  height: 5%; }
 
 .gameContainer {
-  height: 83vh;
+  height: 100%;
   padding: 0px;
   background-color: black;
   box-sizing: border-box; }
 
 .playButton {
   height: 40px;
-  width: 42%;
-  margin: 0 auto;
-  margin-top: calc(calc(83vh / 2) - 40px);
-  margin-bottom: calc(calc(83vh / 2) - 40px);
+  margin: calc( (100% / 2) - 40px) auto;
   display: block;
   box-sizing: border-box;
   padding: 5px; }
@@ -66,18 +72,19 @@ Then, give all components a relative height */
   margin-top: 10px; }
 
 .chatComponents {
-  display: border-box;
+  box-sizing: border-box;
   border-radius: 10px;
   height: 100%;
   margin: 5px; }
 
 .messageForm {
   padding: 3px;
-  border: 1px dashed rgba(0, 0, 0, 0.2); }
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  height: 100%; }
 
 #messageDisplay {
   padding: 5px;
-  height: 90%;
+  height: 79%;
   border-radius: 10px;
   background-color: rgba(172, 172, 172, 0.18);
   overflow-y: auto;
@@ -96,6 +103,9 @@ Then, give all components a relative height */
   width: 75%;
   margin-right: 0.5%; }
 
+#chatForm {
+  height: 100%; }
+
 #sendMessage {
   width: 24%;
   padding: 10px; }
@@ -105,4 +115,4 @@ Then, give all components a relative height */
 
 .chatFooter {
   margin-top: 5px;
-  height: 10%; }
+  height: 18%; }

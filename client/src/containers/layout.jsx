@@ -17,7 +17,7 @@ class Layout extends Component {
       <div>
         <Header />
         <div className="container mainContainer">
-          <div className="row">
+          <div className="row" id="mainRow">
             <Leaderboard />
             { this.props.children }
             <GameContainer />

@@ -13,6 +13,11 @@ const preload = () => {
   PB.game.preloadBar.anchor.setTo(0.5);
   PB.game.preloadBar.scale.setTo(5);
   PB.game.load.setPreloadSprite(PB.game.preloadBar);
+
+  //load level assets
+  // PB.game.load.image('gameTiles', '../../assets/images/tiles_spritesheet.png');
+  // PB.game.load.tilemap('level1', '../../assets/levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
+  PB.game.load.image('platform', '../../assets/images/platform.png');
 }
 const create = () => {
   //launch next game state;
