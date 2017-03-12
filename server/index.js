@@ -80,6 +80,9 @@ io.on('connection', (socket) => {
     // console.log('findPlayer id:', indexToUpdate);
     players[indexToUpdate].x = playerObj.x;
     players[indexToUpdate].y = playerObj.y;
+    players[indexToUpdate].velocityY = playerObj.y;
+    players[indexToUpdate].velocityX = playerObj.x;
+    players[indexToUpdate].dir = playerObj.dir;
     console.log('sending updated player:', players[indexToUpdate]);
     throttledStateChange();
   });

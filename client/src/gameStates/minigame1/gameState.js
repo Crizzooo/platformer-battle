@@ -4,6 +4,7 @@ let currentPlayer;
 // socket.on('playerMovement', (playerObjects) => {
 //   console.log('client 2 received:', playerObjects);
 // });
+const GRAVITY = 1000;
 
 const init = (msg) => {
   console.log('PB Custom Params:', PB.customParams);
@@ -14,7 +15,7 @@ const init = (msg) => {
   PB.customParams.JUMPING_SPEED = 100;
 
   //initiate physics
-  PB.game.physics.arcade.gravity.y = 1000;
+  PB.game.physics.arcade.gravity.y = GRAVITY;
 
   //cursor keys
   // PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
@@ -30,51 +31,72 @@ const create = () => {
   loadLevel();
 }
 
-var isMoving;
+var isMoving, isJumping;
 const update = () => {
   PB.game.physics.arcade.collide(PB.game.playersGroup);
-  currentPlayer.body.velocity.x = 0;
+  let dir;
   if(PB.game.cursors.left.isDown){
     isMoving = true;
     currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
     currentPlayer.scale.setTo(1, 1);
     currentPlayer.play('walking');
+    dir = -1;
   } else if(PB.game.cursors.right.isDown){
     isMoving = true;
     currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
     currentPlayer.scale.setTo(-1, 1);
     currentPlayer.play('walking');
+    dir = 1;
   }
   else {
+    console.log('player stopped moving');
     isMoving = false;
+    currentPlayer.body.velocity.x = 0;
     currentPlayer.animations.stop();
     currentPlayer.frame = 3;
+    dir = 0;
   }
 
   if (PB.game.cursors.up.isDown){
     isMoving = true;
+    isJumping = true;
     currentPlayer.body.velocity.y = -PB.customParams.JUMPING_SPEED;
     currentPlayer.scale.setTo(1, -1);
     currentPlayer.play('walking');
+  } else {
+    isJumping = false;
+    currentPlayer.body.velocity.y = 0;
+    currentPlayer.body.gravity.y = GRAVITY;
   }
 
-  if (isMoving) {
+  if (isMoving || isJumping) {
     console.log(currentPlayer);
     // socket.emit('playerMoving', {socketId: socket.id, x: currentPlayer.x, y: currentPlayer.y});
+    console.log('player moving, emitting!');
+    socket.emit('playerMoving', {
+      socketId: socket.id,
+      x: currentPlayer.x,
+      y: currentPlayer.y,
+      xVelocity: currentPlayer.body.velocity.x,
+      yVelocity: currentPlayer.body.velocity.y,
+      dir: dir});
   }
 
   console.log('Player State in Phaser:', PB.customParams.players);
+  console.log('Player Group:', PB.game.playersGroup.children);
   PB.customParams.players.forEach( (player) => {
     console.log('looping over this guy:', player);
     var playerIndexToUpdate = findPlayer(player.socketId);
+    console.log('what does a player look like?', PB.game.playersGroup.children);
     PB.game.playersGroup.children[playerIndexToUpdate].x = player.x;
     PB.game.playersGroup.children[playerIndexToUpdate].y = player.y;
+    PB.game.playersGroup.children[playerIndexToUpdate].body.velocity.y = player.velocityY;
+    PB.game.playersGroup.children[playerIndexToUpdate].body.velocity.x = player.velocityX;
+    PB.game.playersGroup.children[playerIndexToUpdate].scale.setTo(player.dir);
   })
-  socket.emit('playerMoving', {socketId: socket.id, x: currentPlayer.x, y: currentPlayer.y, xVelocity: currentPlayer.body.velocity.x, yVelocity: currentPlayer.body.velocity.y});
 }
 
 function findPlayer(socketId){
-  console.log('Searching in:', PB.game.playersGroup, ' for ', socketId);
   return R.findIndex(R.propEq('socketId', socketId))(PB.game.playersGroup.children);
 }
 

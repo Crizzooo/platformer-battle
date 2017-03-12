@@ -46,7 +46,7 @@ function startClientGame(players) {
 }
 
 function dispatchNewGameState(playerObjects) {
-  console.log('client received:', playerObjects);
+  console.log('client received new GameState:', playerObjects);
   store.dispatch(dispatchGameUpdate(playerObjects));
 }
 

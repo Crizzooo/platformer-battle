@@ -14,13 +14,11 @@ export class lobbyControls extends React.Component {
   }
 
   handleChange(evt) {
-    console.log(evt.target.value);
     this.setState({ name: evt.target.value })
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log('Client is emitting this player obj:', this.state);
     socket.emit('playerJoined', this.state);
     $('#addPlayerModal').modal('hide');
     $('#playerNameInput').val('');
