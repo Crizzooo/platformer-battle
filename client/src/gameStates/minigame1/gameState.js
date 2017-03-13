@@ -1,4 +1,5 @@
 const R = require('ramda');
+const throttle = require('lodash.throttle');
 let currentPlayer;
 let remotePlayers = [];
 let score = 0;
@@ -11,15 +12,15 @@ const initScore = () => {
 }
 
 const updatePlayers = (arrPlayerData) => {
-  console.log('updating players');
+  console.log('updating players', arrPlayerData);
   let playersToUpdate = arrPlayerData;
   if (currentPlayer) {
     playersToUpdate = arrPlayerData.filter( (player) => player.socketId !== currentPlayer.socketId);
   }
   playersToUpdate.forEach( (player) => {
     let movingPlayerSprite = findPlayer(player.socketId);
-    console.log("received state:", player);
-    console.log('moving Player old state:', movingPlayerSprite);
+    // console.log("received state:", player);
+    // console.log('moving Player old state:', movingPlayerSprite);
     movingPlayerSprite.x = player.x;
     movingPlayerSprite.y = player.y;
     // movingPlayerSprite.velocityX = player.velocityX;
@@ -48,7 +49,10 @@ const init = (msg) => {
   //cursor keys
   // PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
   socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
-  socket.on('GameStateChange', updatePlayers);
+  socket.on('GameStateChange', (playerData) => {
+    console.log('received game state change: ', playerData);
+    updatePlayers(playerData);
+  });
   console.log('socket should be listening....');
 }
 
@@ -62,10 +66,14 @@ const create = () => {
   initStars();
   initScore();
   initIceBalls();
+
+  currentPlayer.ableToFire = true;
 }
 
 var isMoving = false;
 var isJumping = false;
+
+const throttledServerUpdate = throttle(emitPlayerMoving, 0);
 const update = () => {
 
   //NOTE: Collision between SpriteA and SpriteB - callback takes in SpriteA and SpriteB
@@ -75,76 +83,91 @@ const update = () => {
   PB.game.physics.arcade.collide(PB.game.playersGroup, PB.game.platform2);
 
   PB.game.physics.arcade.collide(PB.game.stars, PB.game.playersGroup, starPlayerCollision)
-  PB.game.physics.arcade.collide(remotePlayers, PB.game.iceBalls, freezePlayer);
+  PB.game.physics.arcade.collide(PB.game.playersGroup, PB.game.iceBalls, freezePlayer);
   PB.game.physics.arcade.collide(PB.game.iceBalls, PB.game.platform1, iceBallCollision);
+
+  PB.game.playersGroup.forEach( (player) => {
+    player.immovable = true;
+  });
+
   if (PB.game.cursors.spacebar.isDown){
-    createPlayerIceBullet();
+    sendIceBall();
   }
 
   if (currentPlayer != null && currentPlayer.alive == true){
     // console.log('Player is alive');
     if (currentPlayer.isFrozen) {
-      return;
-    }
-
-    //player moving left
-    if (PB.game.cursors.left.isDown){
-      var isMoving = true;
-      currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
-      currentPlayer.dir = "left";
-      //player moving right
-    } else if (PB.game.cursors.right.isDown){
-      var isMoving = true;
-      currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
-      currentPlayer.dir = "right";
-    } else {
-      //player not moving sideways
-      //if they are touching ground, they are also not jumping
       currentPlayer.body.velocity.x = 0;
-      currentPlayer.animations.stop();
-      currentPlayer.frame = 3;
-      currentPlayer.dir = "front";
-    }
-    //start a jump if touching ground
-    if (isJumping && currentPlayer.body.touching.down) {
-      isJumping = false;
-    }
-    if (PB.game.cursors.up.isDown && (currentPlayer.body.blocked.down || currentPlayer.body.touching.down)){
+      currentPlayer.ableToFire = false;
+    } else {
+      //player moving left
+      if (PB.game.cursors.left.isDown){
+        var isMoving = true;
+        currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
+        currentPlayer.dir = "left";
+        //player moving right
+      } else if (PB.game.cursors.right.isDown){
+        var isMoving = true;
+        currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
+        currentPlayer.dir = "right";
+      } else if (PB.game.cursors.down.isDown){
+        currentPlayer.dir = "down";
+      } else {
+        //player not moving sideways
+        //if they are touching ground, they are also not jumping
+        currentPlayer.body.velocity.x = 0;
+        currentPlayer.animations.stop();
+        currentPlayer.frame = 3;
+        currentPlayer.dir = "front";
+      }
+      //start a jump if touching ground
+      if (isJumping && currentPlayer.body.touching.down) {
+        isJumping = false;
+      }
+      if (PB.game.cursors.up.isDown && (currentPlayer.body.blocked.down || currentPlayer.body.touching.down)){
+          isMoving = true;
+          isJumping = true;
+          currentPlayer.body.velocity.y = -500;
+      }
+      //if they were jumping and dont touch ground, they are moving
+      if (isJumping && !currentPlayer.body.touching.down){
         isMoving = true;
-        isJumping = true;
-        currentPlayer.body.velocity.y = -500;
+      }
+      //if they are not jumping or moving, stop the player
+      if (!isJumping && !isMoving){
+        currentPlayer.frame = 3;
+      } else if(isMoving) {
+        //if they are moving (by jumping or sideways, broadcast update
+        currentPlayer.play('walking');
+      }
     }
-    //if they were jumping and dont touch ground, they are moving
-    if (isJumping && !currentPlayer.body.touching.down){
-      isMoving = true;
-    }
-    //if they are not jumping or moving, stop the player
-    if (!isJumping && !isMoving){
-        socket.emit('playerMoving', {
-          x: currentPlayer.x,
-          y: currentPlayer.y,
-          velocityY: currentPlayer.body.velocity.y,
-          velocityX: currentPlayer.body.velocity.x,
-          dir: currentPlayer.dir,
-          socketId: currentPlayer.socketId
-        });
-    } else if(isMoving) {
-      //if they are moving (by jumping or sideways, broadcast update
-      currentPlayer.play('walking');
-      socket.emit('playerMoving', {
-        x: currentPlayer.x,
-        y: currentPlayer.y,
-        velocityY: currentPlayer.body.velocity.y,
-        velocityX: currentPlayer.body.velocity.x,
-        dir: currentPlayer.dir,
-        socketId: currentPlayer.socketId
-      });
-    }
+    console.log('emit player?', currentPlayer);
+    // socket.emit('playerMoving', {
+    //   x: currentPlayer.x,
+    //   y: currentPlayer.y,
+    //   velocityY: currentPlayer.body.velocity.y,
+    //   velocityX: currentPlayer.body.velocity.x,
+    //   dir: currentPlayer.dir,
+    //   socketId: currentPlayer.socketId
+    // });
+    throttledServerUpdate(currentPlayer);
     // console.log('currentPlayer', currentPlayer);
     // console.log('player moving:', isMoving);
     // console.log('player jumping:', isJumping);
   }
 }
+
+function emitPlayerMoving(currentPlayer){
+  socket.emit('playerMoving', {
+    x: currentPlayer.x,
+    y: currentPlayer.y,
+    velocityY: currentPlayer.body.velocity.y,
+    velocityX: currentPlayer.body.velocity.x,
+    dir: currentPlayer.dir,
+    socketId: currentPlayer.socketId
+  });
+}
+
 
 function findPlayer(socketId){
   return R.find(R.propEq('socketId', socketId))(PB.game.playersGroup.children);
@@ -225,8 +248,7 @@ const loadLevel = () => {
 
         if (playerObj.socketId === socket.id){
           console.log('My current Player is: ', playerObj);
-          currentPlayer = playerToAdd;
-          PB.game.camera.follow(currentPlayer);
+          currentPlayer = playerToAdd; PB.game.camera.follow(currentPlayer);
         } else {
           console.log('Pushiong remote player: ', playerToAdd);
           remotePlayers.push(playerToAdd);
@@ -242,10 +264,13 @@ const initIceBalls = () => {
   PB.game.iceBalls.enableBody = true;
 }
 
-function createPlayerIceBullet() {
+function sendIceBall() {
+  console.log('send ice ball func');
   if (!currentPlayer || currentPlayer.ableToFire == false) {
+    console.log('player unable to fire');
     return;
   }
+
   var x, y, velocity;
   switch (currentPlayer.dir) {
     case 'right':
@@ -263,31 +288,51 @@ function createPlayerIceBullet() {
       y = currentPlayer.body.top - 1;
       velocity = -ICE_BALL_SPEED;
       break;
+    case 'down':
+      x = currentPlayer.body.center.x;
+      y = currentPlayer.body.bottom + 1;
+      velocity = ICE_BALL_SPEED;
     default:
       x = currentPlayer.body.right + 1;
       y = currentPlayer.body.center.y;
       velocity = ICE_BALL_SPEED;
       break;
   }
+  if (!currentPlayer.dir){
+    return;
+  }
+  //create IceBall
+  //emit Iceball
+  console.log('emit fireIceBall');
+  console.log('sending fire ball x:', x, 'y: ', y, 'velocity: ', velocity, 'cp: ', currentPlayer.socketId);
+  socket.emit('fireIceBall', x, y, velocity, currentPlayer.dir, currentPlayer.socketId);
+  //disallow firing for 1 second
+  currentPlayer.ableToFire = false;
+  PB.game.time.events.add(Phaser.Timer.SECOND * 0.75, allowIceBall);
+}
+
+function createIceBall(x, y, velocity, dir, senderSocketId){
   var iceBall = PB.game.iceBalls.getFirstExists(false);
   if (!iceBall){
-    iceBall = new PB.IceBall(PB.game, x, y);
+    iceBall = new PB.IceBall(PB.game, x, y, senderSocketId);
     PB.game.iceBalls.add(iceBall);
     iceBall.scale.setTo(0.14);
   } else {
+    iceBall.senderSocketId = senderSocketId;
     iceBall.reset(x, y);
   }
-  if (currentPlayer.dir == 'right' || currentPlayer.dir == 'left'){
+
+  if (dir == 'right' || dir == 'left'){
     iceBall.body.velocity.x = velocity;
-  } else if (currentPlayer.dir == 'front') {
+  } else if (dir == 'front' || dir == 'down') {
     iceBall.body.velocity.y = velocity;
   }
 
-  //disallow firing for 1 second
-  currentPlayer.ableToFire = false;
-  PB.game.time.events.add(Phaser.Timer.SECOND * 0.75, allowIceBall, iceBall);
 }
 
+socket.on('createIceBall', (x, y, velocity, direction, senderSocketId) => {
+  createIceBall(x, y, velocity, direction, senderSocketId);
+})
 
 function allowIceBall() {
   currentPlayer.ableToFire = true;
@@ -302,9 +347,16 @@ function iceBallCollision(platformSprite, iceBall){
 let IceCube;
 function freezePlayer(hitPlayer, iceBall){
   console.log('freezePlayer function received:', hitPlayer, iceBall);
+  console.log('The iceball was sent by: ', iceBall.senderSocketId);
+
+  if (hitPlayer.socketId == iceBall.senderSocketId){
+    return;
+  }
+
   console.log('Player has been hit!', hitPlayer);
-  
+
   if (hitPlayer.isFrozen) {
+    iceBall.kill();
     return;
   }
   //stop player movement and animations
@@ -370,6 +422,3 @@ function starPlayerCollision(star, player) {
   score += 10;
   scoreText.text = 'Score: ' + score;
 }
-
-
-

@@ -56,14 +56,12 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getPlayers', () => {
-    console.log('server is sending players:', players);
     socket.emit('playerUpdate', players);
   })
 
   //TODO: emit all the messages in the array
   //TODO: listen for new messages coming in and emit all the messages
   socket.on('newChatMessage', (msgObjFromClient) => {
-    console.log('This message was received from client:', msgObjFromClient.message);
     //emit message
     io.emit('messagesUpdate', msgObjFromClient);
   })
@@ -73,37 +71,52 @@ io.on('connection', (socket) => {
     io.emit('startGame', players)
   })
 
+  const throttledStateChange = throttle(emitStateChange, 16);
   socket.on('playerMoving', (playerObj) => {
+    // console.log('receive player?', playerObj);
     // console.log('current server players state:', players);
-    // console.log('looking for ', playerObj);
+    console.log('looking for ', playerObj);
+    console.log('in ', players);
     var indexToUpdate = findPlayer(playerObj.socketId);
-    // console.log('findPlayer id:', indexToUpdate);
+    console.log('findPlayer id:', indexToUpdate);
+
+    console.log('does server make it here')
     var movingPlayer = players[indexToUpdate];
     if (!movingPlayer) {
       return;
     }
+    console.log('WHAT ABOUT HERE');
     movingPlayer.x = playerObj.x;
     movingPlayer.y = playerObj.y;
     movingPlayer.velocityY = playerObj.velocityY;
     movingPlayer.velocityX = playerObj.velocityX;
     movingPlayer.dir = playerObj.dir;
+    movingPlayer.socketId = playerObj.socketId;
     movingPlayer.hasMoved = true;
     console.log('sending updated player:', players[indexToUpdate]);
     // emitStateChange();
     throttledStateChange();
   });
+
+  socket.on('fireIceBall', (x, y, velocity, direction, senderSocketId) => {
+    console.log('server telling clients to create iceball:', x, y, velocity, senderSocketId);
+    io.emit('createIceBall', x, y, velocity, direction, senderSocketId);
+  });
 })
 
 
-var throttledStateChange = throttle(emitStateChange, 5);
+// function throttledStateChange() {
+//   return throttle(emitStateChange, 5);
+// }
+
 
 //create functions for sockets
 function findPlayer(socketId){
-  console.log('Searching in:', players, ' for ', socketId);
   return R.findIndex(R.propEq('socketId', socketId))(players);
 }
 
 function emitStateChange(){
+  console.log('emitting players:', players);
   io.emit('GameStateChange', players);
 }
 

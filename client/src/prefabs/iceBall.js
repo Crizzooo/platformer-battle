@@ -1,7 +1,7 @@
 var PB = PB || {};
 
 
-PB.IceBall = function(game, x, y){
+PB.IceBall = function(game, x, y, senderSocketId){
   Phaser.Sprite.call(this, game, x, y, 'iceBall');
   this.game = game;
   this.game.physics.arcade.enable(this);
@@ -9,6 +9,8 @@ PB.IceBall = function(game, x, y){
   this.body.allowGravity = false;
   this.checkWorldBounds = true;
   this.outOfBoundsKill = true;
+
+  this.senderSocketId = senderSocketId;
 }
 
 PB.IceBall.prototype = Object.create(Phaser.Sprite.prototype);
