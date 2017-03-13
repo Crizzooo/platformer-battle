@@ -16,6 +16,7 @@ const preload = () => {
   PB.game.load.image('iceBall', '../../assets/images/IceBall.png');
   PB.game.load.image('iceCube', '../../assets/images/iceCubeSprite.png');
   PB.game.load.image('star', '../../assets/images/starSprite.png');
+  PB.game.load.image('snowLandscape', '../assets/images/snowLandscape.png');
 
   //Atlases
   PB.game.load.atlasXML('blueGunGuy', '../../assets/images/blueGunGuyAtlas.png', '../../assets/images/blueGunGuyAtlasXML.xml');

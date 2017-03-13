@@ -190,7 +190,9 @@ const playerData = [{x: 100, y: 300}, {x: 100, y: 30}, {x: 500, y: 300}, {x: 500
 const loadLevel = () => {
   //load map
   // PB.game.map = PB.game.add.tilemap('level1');
-
+  PB.gameBackground = PB.game.add.sprite(PB.game.world.centerX, PB.game.world.centerY, 'snowLandscape');
+  PB.gameBackground.scale.setTo(0.9, 0.9);
+  PB.gameBackground.anchor.setTo(0.5);
   //create layers
   // PB.game.backgroundLayer = PB.game.map.createLayer('backgroundLayer');
   // PB.game.collisionLayer = PB.game.map.createLayer('collisionLayer');
@@ -216,10 +218,8 @@ const loadLevel = () => {
 
   PB.game.star = PB.game.add.sprite(30, 250, 'star');
   PB.game.star.scale.setTo(0.5);
-  PB.game.iceCube = PB.game.add.sprite(100, 350, 'iceCube');
-  PB.game.iceCube.scale.setTo(0.15);
-  PB.game.iceBall = PB.game.add.sprite(100, 300,'iceBall');
-  PB.game.iceBall.scale.setTo(0.1);
+
+
 
   //load players & remote players
   PB.game.playersGroup = PB.game.add.group();
