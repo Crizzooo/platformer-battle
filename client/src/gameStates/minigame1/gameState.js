@@ -35,6 +35,8 @@ const GRAVITY = 1000;
 const ICE_BALL_SPEED = 300;
 const ICE_BALL_RELOAD_TIME = Phaser.Timer.SECOND * 0.75;
 
+let arrStarPositions = [{x: 30, y: 30}, {x: 50, y: 50}, {x: 90, y: 400}, {x: 180, y: 180}]
+
 const init = (msg) => {
   console.log('PB Custom Params:', PB.customParams);
   PB.customParams.msg = msg;
@@ -54,6 +56,8 @@ const init = (msg) => {
     updatePlayers(playerData);
   });
   console.log('socket should be listening....');
+
+
 }
 
 const preload = () => {
@@ -66,6 +70,7 @@ const create = () => {
   initStars();
   initScore();
   initIceBalls();
+  socket.emit('starsToCreate', (arrStarPositions))
 
   currentPlayer.ableToFire = true;
 }
@@ -155,7 +160,10 @@ const update = () => {
     // console.log('player moving:', isMoving);
     // console.log('player jumping:', isJumping);
   }
+
 }
+
+socket.on('createThisStar', (x, y) => createStars(x, y))
 
 function emitPlayerMoving(currentPlayer){
   socket.emit('playerMoving', {
@@ -182,7 +190,7 @@ const MiniGameOneState = {
 
 export default MiniGameOneState;
 
-const playerData = [{x: 100, y: 300}, {x: 100, y: 30}, {x: 500, y: 300}, {x: 500, y: 30}];
+const playerData = [{x: 100, y: 300}, {x: 100, y: 30}, {x: 500, y: 300}, {x: 500, y: 30}, {x: 100, y: 130}, {x: 400, y: 200}];
 
 const loadLevel = () => {
   //load map
@@ -390,25 +398,26 @@ function unfreezePlayer(IceCube) {
 const initStars = () => {
   PB.game.stars = PB.game.add.group()
   PB.game.stars.enableBody = true;
-  PB.game.time.events.loop(Phaser.Timer.SECOND * 2, createStarOnTimer, PB.Star)
+  // PB.game.time.events.loop(Phaser.Timer.SECOND * 2, createStarOnTimer, PB.Star)
+  // need server to be send out this info?
 }
+
+let newStarsArray = []
 
 function createStars(x, y) {
-  var star = PB.game.stars.getFirstExists(false);
-  if(!star) {
-    star = new PB.Star(PB.game, x, y)
-    star.scale.setTo(0.5)
-    PB.game.stars.add(star)
+  console.log('creating stars on client', x, y)
+  var newStar = PB.game.stars.getFirstExists(false);
+  if(!newStar) {
+    newStar = new PB.Star(PB.game, x, y)
+    newStar.scale.setTo(0.5)
+    PB.game.stars.add(newStar)
     console.log('create star');
   } else {
-    star.reset(x, y)
+    newStar.reset(x, y)
   }
+  newStar.starId = newStarsArray.length
+  newStarsArray.push(newStar)
 }
-
-
-
-var arrStarPositions = [{x: 30, y: 30}, {x: 50, y: 50}, {x: 90, y: 400}, {x: 180, y: 180}]
-
 
 function createStarOnTimer() {
   let randNum = Math.floor(Math.random() * 4)
@@ -418,7 +427,39 @@ function createStarOnTimer() {
 }
 
 function starPlayerCollision(star, player) {
-  star.kill();
+  socket.emit('removeCollectedStar', star.starId)
+  console.log(star)
+  // star.kill();
   score += 10;
   scoreText.text = 'Score: ' + score;
 }
+
+socket.on('destroyThisStar', (starId) => {
+  newStarsArray[starId].kill()
+})
+
+
+
+
+
+
+
+/* - star logic
+
+client - on create emit out a socket action with the position of all the stars?
+
+server - receive that action and send back stars into a function that will go into the update function
+
+client - in update function create stars with that information
+
+//
+
+Other idea:
+
+Have the server generate random information of x, y at some interval
+have the client listening for those emits and run the create StarOnTimer function when info is received
+
+When a star is collected send back that the specific star was killed to the server
+Update the star positions on each players screen?
+
+*/
