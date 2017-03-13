@@ -13,7 +13,7 @@ const initScore = () => {
 }
 
 const updatePlayers = (arrPlayerData) => {
-  console.log('updating players', arrPlayerData);
+  // console.log('updating players', arrPlayerData);
   let playersToUpdate = arrPlayerData;
   if (currentPlayer) {
     playersToUpdate = arrPlayerData.filter( (player) => player.socketId !== currentPlayer.socketId);
@@ -52,7 +52,7 @@ const init = (msg) => {
   // PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
   socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
   socket.on('GameStateChange', (playerData) => {
-    console.log('received game state change: ', playerData);
+    // console.log('received game state change: ', playerData);
     updatePlayers(playerData);
   });
   console.log('socket should be listening....');
@@ -148,7 +148,7 @@ const update = () => {
         currentPlayer.play('walking');
       }
     }
-    console.log('emit player?', currentPlayer);
+    // console.log('emit player?', currentPlayer);
     // socket.emit('playerMoving', {
     //   x: currentPlayer.x,
     //   y: currentPlayer.y,
@@ -362,6 +362,7 @@ function createIceBall(x, y, velocity, dir, senderSocketId){
     iceBall.body.velocity.y = velocity;
   }
 
+  PB.game.time.events.add(Phaser.Timer.SECOND * 2.5, (iceBall) => iceBall.kill(), iceBall, iceBall);
 }
 
 socket.on('createIceBall', (x, y, velocity, direction, senderSocketId) => {
@@ -419,6 +420,7 @@ function unfreezePlayer(IceCube) {
   IceCube.kill();
   this.frame = 3;
   this.isFrozen = false;
+  this.ableToFire = true;
 }
 
 const initStars = () => {
@@ -455,4 +457,7 @@ function starPlayerCollision(star, player) {
   star.kill();
   score += 10;
   scoreText.text = 'Score: ' + score;
+  socket.emit('playerScored', player.socketId, score);
+  const message = player.name + 'has collected a star. New Score: ' + score;
+  socket.emit('newChatMessage', {message: message, name: 'Game Host'})
 }
