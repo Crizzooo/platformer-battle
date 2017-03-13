@@ -34,6 +34,7 @@ const updatePlayers = (arrPlayerData) => {
 const GRAVITY = 1000;
 const ICE_BALL_SPEED = 300;
 const ICE_BALL_RELOAD_TIME = Phaser.Timer.SECOND * 0.75;
+const SPRITE_SCALE_SIZE = 1.75;
 
 const init = (msg) => {
   console.log('PB Custom Params:', PB.customParams);
@@ -105,11 +106,13 @@ const update = () => {
         var isMoving = true;
         currentPlayer.body.velocity.x = -PB.customParams.RUNNING_SPEED;
         currentPlayer.dir = "left";
+        currentPlayer.scale.setTo(-SPRITE_SCALE_SIZE, SPRITE_SCALE_SIZE);
         //player moving right
       } else if (PB.game.cursors.right.isDown){
         var isMoving = true;
         currentPlayer.body.velocity.x = PB.customParams.RUNNING_SPEED;
         currentPlayer.dir = "right";
+        currentPlayer.scale.setTo(SPRITE_SCALE_SIZE, SPRITE_SCALE_SIZE);
       } else if (PB.game.cursors.down.isDown){
         currentPlayer.dir = "down";
       } else {
@@ -222,6 +225,13 @@ const loadLevel = () => {
   PB.game.playersGroup = PB.game.add.group();
   PB.game.playersGroup.enableBody = true;
 
+  const arrayOfGunGuys = [
+      ['blueGunGuy', 'blueGunGuy_01.png'],
+      ['greenGunGuy', 'greenGunGuy_01.png'],
+      ['pinkGunGuy', 'pinkGunGuy_01.png'],
+      ['greyGunGuy', 'greyGunGuy_01.png']
+  ];
+
   //create Remote Player group to check ice ball collision on
   // PB.game.remotePlayersGroup = PB.game.add.group();
   // PB.game.remotePlayersGroup.enableBody = true;
@@ -230,12 +240,12 @@ const loadLevel = () => {
       PB.customParams.players.forEach( (playerObj, index) => {
         //TODO: Change sprite on each iteration to be a color]
         console.log('Creating Player: ', playerObj);
-        const playerToAdd = PB.game.playersGroup.create(playerData[index].x, playerData[index].y, 'player');
+        const playerToAdd = PB.game.playersGroup.create(playerData[index].x, playerData[index].y, arrayOfGunGuys[index][0], arrayOfGunGuys[index][1]);
         playerToAdd.socketId = playerObj.socketId;
 
         //all players get a physics body
         playerToAdd.anchor.setTo(0.5);
-        playerToAdd.scale.setTo(1);
+        playerToAdd.scale.setTo(SPRITE_SCALE_SIZE);
         playerToAdd.animations.add('walking', [0, 1, 2, 1], 6, true);
         playerToAdd.body.collideWorldBounds = true;
         playerToAdd.body.allowGravity = true;
@@ -371,7 +381,7 @@ function freezePlayer(hitPlayer, iceBall){
   IceCube = PB.game.add.sprite(0, 0, 'iceCube');
   hitPlayer.addChild(IceCube);
   IceCube.anchor.setTo(0.5);
-  IceCube.scale.setTo(0.15);
+  IceCube.scale.setTo(0.10);
   IceCube.alpha = 0.5;
 
 

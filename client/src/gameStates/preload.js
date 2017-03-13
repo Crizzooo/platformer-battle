@@ -17,6 +17,12 @@ const preload = () => {
   PB.game.load.image('iceCube', '../../assets/images/iceCubeSprite.png');
   PB.game.load.image('star', '../../assets/images/starSprite.png');
 
+  //Atlases
+  PB.game.load.atlasXML('blueGunGuy', '../../assets/images/blueGunGuyAtlas.png', '../../assets/images/blueGunGuyAtlasXML.xml');
+  PB.game.load.atlasXML('greenGunGuy', '../../assets/images/greenGunGuyAtlas.png', '../../assets/images/greenGunGuyAtlasXML.xml');
+  PB.game.load.atlasXML('greyGunGuy', '../../assets/images/greyGunGuyAtlas.png', '../../assets/images/greyGunGuyAtlasXML.xml');
+  PB.game.load.atlasXML('pinkGunGuy', '../../assets/images/pinkGunGuyAtlas.png', '../../assets/images/pinkGunGuyAtlasXML.xml');
+
   //load level assets
   // PB.game.load.image('gameTiles', '../../assets/images/tiles_spritesheet.png');
   // PB.game.load.tilemap('level1', '../../assets/levels/level1.json', null, Phaser.Tilemap.TILED_JSON);
