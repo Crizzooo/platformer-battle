@@ -102,6 +102,10 @@ io.on('connection', (socket) => {
     console.log('server telling clients to create iceball:', x, y, velocity, senderSocketId);
     io.emit('createIceBall', x, y, velocity, direction, senderSocketId);
   });
+
+  socket.on('playerScored', (playerId, score) => {
+    io.emit('updateLeaderboard', playerId, score);
+  })
 })
 
 

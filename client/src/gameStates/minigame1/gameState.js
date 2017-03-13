@@ -4,6 +4,7 @@ let currentPlayer;
 let remotePlayers = [];
 let score = 0;
 let scoreText;
+var platformArray = [];
 //take out text if we don't need, score can still be tracked
 //implement timer, at end of timer show scores? or just declare "PLAYER 'NAME' IS WINNER"
 
@@ -12,7 +13,7 @@ const initScore = () => {
 }
 
 const updatePlayers = (arrPlayerData) => {
-  console.log('updating players', arrPlayerData);
+  // console.log('updating players', arrPlayerData);
   let playersToUpdate = arrPlayerData;
   if (currentPlayer) {
     playersToUpdate = arrPlayerData.filter( (player) => player.socketId !== currentPlayer.socketId);
@@ -51,7 +52,7 @@ const init = (msg) => {
   // PB.game.cursors = PB.game.input.keyboard.createCursorKeys();
   socket.emit('newChatMessage', {message: PB.customParams.msg, name: 'PHASER GAME'});
   socket.on('GameStateChange', (playerData) => {
-    console.log('received game state change: ', playerData);
+    // console.log('received game state change: ', playerData);
     updatePlayers(playerData);
   });
   console.log('socket should be listening....');
@@ -86,6 +87,9 @@ const update = () => {
   PB.game.physics.arcade.collide(PB.game.stars, PB.game.playersGroup, starPlayerCollision)
   PB.game.physics.arcade.collide(PB.game.playersGroup, PB.game.iceBalls, freezePlayer);
   PB.game.physics.arcade.collide(PB.game.iceBalls, PB.game.platform1, iceBallCollision);
+
+  PB.game.physics.arcade.collide(PB.game.playersGroup, platformArray);
+  PB.game.physics.arcade.collide(PB.game.iceBalls, platformArray, iceBallCollision);
 
   PB.game.playersGroup.forEach( (player) => {
     player.immovable = true;
@@ -144,7 +148,7 @@ const update = () => {
         currentPlayer.play('walking');
       }
     }
-    console.log('emit player?', currentPlayer);
+    // console.log('emit player?', currentPlayer);
     // socket.emit('playerMoving', {
     //   x: currentPlayer.x,
     //   y: currentPlayer.y,
@@ -204,22 +208,42 @@ const loadLevel = () => {
   // PB.game.map.setCollisionBetween(1, 160, true, 'collisionLayer');
 
   //resize the world to fit the layer
-  // PB.game.collisionLayer.resizeWorld();
+  PB.game.world.resize(570, 550);
 
   //TODO: Remove these shitty states
-  PB.game.platform1 = PB.game.add.sprite(0, 300, 'platform');
-  PB.game.physics.arcade.enable(PB.game.platform1);
-  PB.game.platform1.body.allowGravity = false;
-  PB.game.platform1.body.immovable = true;
-  PB.game.platform2 = PB.game.add.sprite(100, 500, 'platform');
-  PB.game.physics.arcade.enable(PB.game.platform2);
-  PB.game.platform2.body.allowGravity = false;
-  PB.game.platform2.body.immovable = true;
+  const platformData = [
+    {x1: 100, y1: 100, x2:  135, y2: 100},
+    {x1: 200, y1: 200, x2:  235, y2: 200},
+    {x1: 280, y1: 320, x2:  315, y2: 320},
+    {x1: 400, y1: 400, x2:  435, y2: 400},
+    {x1: 425, y1: 200, x2: 460,  y2: 200 },
+    {x1: 340, y1: 85,  x2: 375,  y2: 85 },
+    {x1: 290, y1: 500, x2:  325, y2: 500},
+    {x1: 175, y1: 395, x2:  210, y2: 395},
+    {x1: 30, y1: 320, x2:  65, y2: 320},
+    {x1: 10, y1: 510, x2: 45, y2: 510},
+    {x1: 480, y1: 521, x2:  510, y2: 521}
+  ];
+  //Create Platforms
+  platformData.forEach( (coords, i) => {
+    PB.game['platformLeft'+i] = PB.game.add.sprite(coords.x1, coords.y1, 'smallIceLeft');
+    PB.game['platformRight'+i] = PB.game.add.sprite(coords.x2, coords.y2, 'smallIceRight');
 
-  PB.game.star = PB.game.add.sprite(30, 250, 'star');
-  PB.game.star.scale.setTo(0.5);
+    PB.game.physics.arcade.enable(PB.game['platformLeft'+i]);
+    PB.game.physics.arcade.enable(PB.game['platformRight'+i]);
 
+    PB.game['platformLeft'+i].body.allowGravity = false;
+    PB.game['platformRight'+i].body.allowGravity = false;
 
+    PB.game['platformLeft'+i].body.immovable = true;
+    PB.game['platformRight'+i].body.immovable = true;
+
+    PB.game['platformLeft'+i].body.setSize(70, 41);
+    PB.game['platformRight'+i].body.setSize(70, 41);
+
+    platformArray.push(PB.game['platformLeft'+i]);
+    platformArray.push(PB.game['platformRight'+i]);
+  });
 
   //load players & remote players
   PB.game.playersGroup = PB.game.add.group();
@@ -338,6 +362,7 @@ function createIceBall(x, y, velocity, dir, senderSocketId){
     iceBall.body.velocity.y = velocity;
   }
 
+  PB.game.time.events.add(Phaser.Timer.SECOND * 2.5, (iceBall) => iceBall.kill(), iceBall, iceBall);
 }
 
 socket.on('createIceBall', (x, y, velocity, direction, senderSocketId) => {
@@ -395,6 +420,7 @@ function unfreezePlayer(IceCube) {
   IceCube.kill();
   this.frame = 3;
   this.isFrozen = false;
+  this.ableToFire = true;
 }
 
 const initStars = () => {
@@ -431,4 +457,7 @@ function starPlayerCollision(star, player) {
   star.kill();
   score += 10;
   scoreText.text = 'Score: ' + score;
+  socket.emit('playerScored', player.socketId, score);
+  const message = player.name + 'has collected a star. New Score: ' + score;
+  socket.emit('newChatMessage', {message: message, name: 'Game Host'})
 }

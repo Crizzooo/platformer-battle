@@ -1,5 +1,5 @@
 import store from './store.js';
-import { loadPlayers, setCurrentPlayer, changeGamePlaying } from './reducers/players-reducer.js';
+import { loadPlayers, setCurrentPlayer, changeGamePlaying, changePlayerScore } from './reducers/players-reducer.js';
 import { loadMessages, addMessage } from './reducers/chatApp-reducer.js';
 import { dispatchGameUpdate } from './reducers/gameState-reducer.js';
 
@@ -14,6 +14,7 @@ const attachFunctions = (socket) => {
   socket.on('messagesUpdate', dispatchNewMessage);
   socket.on('turnOnGameComponent', dispatchGameTrue);
   socket.on('startGame', startClientGame);
+  socket.on('updateLeaderboard', dispatchScoreUpdate);
   // socket.on('GameStateChange', dispatchNewGameState);
 };
 
@@ -48,6 +49,10 @@ function startClientGame(players) {
 function dispatchNewGameState(playerObjects) {
   console.log('client received new GameState:', playerObjects);
   store.dispatch(dispatchGameUpdate(playerObjects));
+}
+
+function dispatchScoreUpdate(playerId, score){
+  store.dispatch(changePlayerScore(playerId, score));
 }
 
 export default attachFunctions;

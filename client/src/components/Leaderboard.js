@@ -4,6 +4,7 @@ import LobbyControls from './lobbyControls';
 import ChatApp from './chatApp.jsx';
 
 function Leaderboard(props) {
+  console.log('received props:', props);
   let players = props.players.sort((a, b) => b.score - a.score);
   let playerRows = [];
   //loop through player count - create player objects
@@ -56,4 +57,4 @@ const mapState = state => ({
   players: state.players.allPlayers
 })
 
-export default connect(mapState)(Leaderboard)
+export default connect(mapState, null)(Leaderboard)
