@@ -1,0 +1,674 @@
+{ "height":20,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 169, 0, 0, 0, 0, 0, 0, 171, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 169, 0, 0, 171, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 169, 0, 171, 169, 0, 171, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 0, 0, 0, 168, 167, 0, 0, 171, 169, 0, 0, 0, 175, 167, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 170, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172, 169, 0, 0, 0, 0, 170, 169, 0, 0, 0, 0],
+         "height":20,
+         "name":"Collision Layer",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        },
+        {
+         "draworder":"topdown",
+         "height":20,
+         "name":"Object Layer",
+         "objects":[
+                {
+                 "gid":247,
+                 "height":35,
+                 "id":2,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":335,
+                 "y":1311
+                },
+                {
+                 "gid":247,
+                 "height":35,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":29,
+                 "y":1157
+                },
+                {
+                 "gid":247,
+                 "height":35,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":647,
+                 "y":1381
+                },
+                {
+                 "gid":247,
+                 "height":35,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":537,
+                 "y":1023
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":7,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":549,
+                 "y":723
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":197,
+                 "y":1001
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":9,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":47,
+                 "y":799
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":109,
+                 "y":1343
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":637,
+                 "y":1225
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":259,
+                 "y":441
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":619,
+                 "y":301
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":151,
+                 "y":137
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":523,
+                 "y":111
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":633,
+                 "y":491
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":291,
+                 "y":689
+                },
+                {
+                 "gid":248,
+                 "height":35,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":35,
+                 "x":59,
+                 "y":575
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        },
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 0, 0, 0, 0, 0, 0, 0, 205, 207, 0, 0, 0, 0, 0, 0, 0, 0, 0, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 213, 213, 213, 213, 213, 213, 211, 213, 217],
+         "height":20,
+         "name":"Decoration",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":20,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tileheight":70,
+ "tilesets":[
+        {
+         "columns":0,
+         "firstgid":160,
+         "margin":0,
+         "name":"Ice",
+         "spacing":0,
+         "tilecount":87,
+         "tileheight":70,
+         "tiles":
+            {
+             "0":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraRight.png"
+                },
+             "1":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraMid.png"
+                },
+             "10":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHalfMid.png"
+                },
+             "11":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHalfLeft.png"
+                },
+             "12":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHalf.png"
+                },
+             "13":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCliffRightAlt.png"
+                },
+             "14":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCliffRight.png"
+                },
+             "15":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCliffLeftAlt.png"
+                },
+             "16":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCliffLeft.png"
+                },
+             "17":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCenter.png"
+                },
+             "18":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraCenter_rounded.png"
+                },
+             "19":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundra.png"
+                },
+             "2":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraLeft.png"
+                },
+             "20":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkTop.png"
+                },
+             "21":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkSplitRight.png"
+                },
+             "22":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkSplitLeft.png"
+                },
+             "23":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBranchRightAlt.png"
+                },
+             "24":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBranchLeftAlt.png"
+                },
+             "25":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBranchEndRight.png"
+                },
+             "26":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBranchEndLeft.png"
+                },
+             "27":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBranch.png"
+                },
+             "28":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBottomAlt3.png"
+                },
+             "29":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBottomAlt2.png"
+                },
+             "3":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraLedgeRight.png"
+                },
+             "30":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBottomAlt.png"
+                },
+             "31":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunkBottom.png"
+                },
+             "32":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTrunk.png"
+                },
+             "33":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTopSnow.png"
+                },
+             "34":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeTop.png"
+                },
+             "35":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesSnowRightSnowAlt.png"
+                },
+             "36":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesSnowRightAlt.png"
+                },
+             "37":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesSnowRight.png"
+                },
+             "38":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesSnowLeft.png"
+                },
+             "39":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesRight.png"
+                },
+             "4":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraLedgeLeft.png"
+                },
+             "40":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesLeftSnowAlt.png"
+                },
+             "41":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesLeftAlt.png"
+                },
+             "42":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/treeBranchesLeft.png"
+                },
+             "43":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tree.png"
+                },
+             "44":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikeTop.png"
+                },
+             "45":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesTopAlt2.png"
+                },
+             "46":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesTopAlt.png"
+                },
+             "47":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesTop.png"
+                },
+             "48":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesBottomAlt2.png"
+                },
+             "49":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesBottomAlt.png"
+                },
+             "5":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHillRight2.png"
+                },
+             "50":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/spikesBottom.png"
+                },
+             "51":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowWave.png"
+                },
+             "52":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowRight.png"
+                },
+             "53":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowMid.png"
+                },
+             "54":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowLeft.png"
+                },
+             "55":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowHillLow.png"
+                },
+             "56":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowHill.png"
+                },
+             "57":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowGroundRight.png"
+                },
+             "58":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowGroundLeft.png"
+                },
+             "59":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowBallGround.png"
+                },
+             "6":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHillRight.png"
+                },
+             "60":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowBallBigGround.png"
+                },
+             "61":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowBallBig.png"
+                },
+             "62":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/snowBall.png"
+                },
+             "63":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/rockAlt.png"
+                },
+             "64":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/rock.png"
+                },
+             "65":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/plantAlt.png"
+                },
+             "66":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/plant.png"
+                },
+             "67":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/pineSaplingAlt.png"
+                },
+             "68":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/pineSapling.png"
+                },
+             "69":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iglooRoofRight.png"
+                },
+             "7":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHillLeft2.png"
+                },
+             "70":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iglooRoofLeft.png"
+                },
+             "71":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iglooRoof.png"
+                },
+             "72":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iglooDoor.png"
+                },
+             "73":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iglooAlt.png"
+                },
+             "74":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/igloo.png"
+                },
+             "75":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterMidAlt.png"
+                },
+             "76":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterMid.png"
+                },
+             "77":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterDeepStarsAlt.png"
+                },
+             "78":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterDeepStars.png"
+                },
+             "79":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterDeepAlt.png"
+                },
+             "8":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHillLeft.png"
+                },
+             "80":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterDeep.png"
+                },
+             "81":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWaterAlt.png"
+                },
+             "82":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceWater.png"
+                },
+             "83":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceBlockHalfAlt.png"
+                },
+             "84":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceBlockHalf.png"
+                },
+             "85":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceBlockAlt.png"
+                },
+             "86":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/iceBlock.png"
+                },
+             "9":
+                {
+                 "image":"..\/Assets\/Game Spritesheet Library\/Tilesets\/Platformer Art Complete Pack\/Ice expansion\/Tiles\/tundraHalfRight.png"
+                }
+            },
+         "tilewidth":70
+        },
+        {
+         "columns":0,
+         "firstgid":247,
+         "margin":0,
+         "name":"objects",
+         "spacing":0,
+         "tilecount":0,
+         "tileheight":1,
+         "tilewidth":1
+        },
+        {
+         "columns":0,
+         "firstgid":247,
+         "margin":0,
+         "name":"objectMap",
+         "spacing":0,
+         "tilecount":0,
+         "tileheight":1,
+         "tilewidth":1
+        },
+        {
+         "columns":1,
+         "firstgid":247,
+         "image":"playerObject.png",
+         "imageheight":35,
+         "imagewidth":35,
+         "margin":0,
+         "name":"playerObject",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":35,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "type":"playerSpawn"
+                }
+            },
+         "tilepropertytypes":
+            {
+             "0":
+                {
+                 "type":"string"
+                }
+            },
+         "tilewidth":35,
+         "transparentcolor":"#ff00ff"
+        },
+        {
+         "columns":1,
+         "firstgid":248,
+         "image":"goalObject.png",
+         "imageheight":36,
+         "imagewidth":36,
+         "margin":0,
+         "name":"goalObject",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":35,
+         "tileproperties":
+            {
+             "0":
+                {
+                 "type":"star"
+                }
+            },
+         "tilepropertytypes":
+            {
+             "0":
+                {
+                 "type":"string"
+                }
+            },
+         "tilewidth":35,
+         "transparentcolor":"#ff00ff"
+        }],
+ "tilewidth":70,
+ "version":1,
+ "width":10
+}
