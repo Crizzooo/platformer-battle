@@ -458,6 +458,6 @@ function starPlayerCollision(star, player) {
   score += 10;
   scoreText.text = 'Score: ' + score;
   socket.emit('playerScored', player.socketId, score);
-  const message = player.name + 'has collected a star. New Score: ' + score;
+  const message = player.name + ' has collected a star. New Score: ' + score;
   socket.emit('newChatMessage', {message: message, name: 'Game Host'})
 }

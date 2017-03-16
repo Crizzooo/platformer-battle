@@ -33,8 +33,11 @@ export default (state = initialState, action) => {
 
     case UPDATE_PLAYER_SCORE:
       let indexToUpdate = findPlayer(action.id);
-      console.log('updating player at ', newState.allPlayers[indexToUpdate], 'to: ', action.newScore);
-      newState.allPlayers[indexToUpdate].score = action.newScore;
+      // newState.allPlayers = [...state.players.slice(0, indexToUpdate), {}]
+
+      // console.log('updating player at ', newState.allPlayers[indexToUpdate], 'to: ', action.newScore);
+      // newState.allPlayers[indexToUpdate].score = action.newScore;
+      newState.allPlayers = [...newState.allPlayers.slice(0, indexToUpdate), Object.assign({}, newState.allPlayers[indexToUpdate], {score: action.newScore}, {socketId: action.id}), ...newState.allPlayers.slice(indexToUpdate + 1)]
       break;
 
     default:
